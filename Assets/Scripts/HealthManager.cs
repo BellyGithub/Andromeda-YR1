@@ -6,11 +6,12 @@ public class HealthManager : MonoBehaviour
 {
     public Image healthBar;
     public float healthAmount = 100f;
+    public static float health;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        health = healthAmount;
     }
 
     // Update is called once per frame
