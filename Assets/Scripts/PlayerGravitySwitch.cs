@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GravitySwitch : MonoBehaviour
+public class PlayerGravitySwitch : MonoBehaviour
 {
     public bool isGravityUpwards = false;
     public GameObject player;
@@ -10,7 +10,7 @@ public class GravitySwitch : MonoBehaviour
     void SwitchGravity()
     {
         isGravityUpwards = !isGravityUpwards;
-        Physics2D.gravity = new Vector2 (Physics2D.gravity.x, -Physics2D.gravity.y);
+        playerRb.gravityScale *= -1;
         Rotate rotateScript = player.GetComponent<Rotate>();
         rotateScript.Rotate180();
     }
