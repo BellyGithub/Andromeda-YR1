@@ -13,10 +13,15 @@ public class Jump : MonoBehaviour
     float xMovement;
     float jumpTime = 0.0f;
     bool isGround;
+
+    PlayerGravitySwitch GSscript;
+    GameObject GameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        GameManager = GameObject.Find("GameManager");
+        GSscript = GameManager.GetComponent<PlayerGravitySwitch>();
     }
 
     // Update is called once per frame
@@ -29,7 +34,7 @@ public class Jump : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             jumpTime = Time.time + 0.2f;
-            if (Physics2D.gravity.y < 0)
+            if (GSscript.isGravityUpwards == false)
             {
                 rb2D.AddForce(new Vector2(0, jumpforce), ForceMode2D.Impulse);
             }
@@ -40,7 +45,7 @@ public class Jump : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Space) && Time.time < jumpTime)
         {
-            if (Physics2D.gravity.y < 0)
+            if (GSscript.isGravityUpwards == false)
             {
                 rb2D.AddForce(new Vector2(0, jumpholdforce), ForceMode2D.Impulse);
             }
