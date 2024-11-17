@@ -20,7 +20,7 @@ public class Jump : MonoBehaviour
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        GameManager = GameObject.Find("GameManager");
+        GameManager = GameObject.Find("PlayerCharacter");
         GSscript = GameManager.GetComponent<PlayerGravitySwitch>();
     }
 
