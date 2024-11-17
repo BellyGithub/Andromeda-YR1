@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class EnemyWander : MonoBehaviour
 {
@@ -38,6 +39,5 @@ public class EnemyWander : MonoBehaviour
                 movingRight = true;
             }
         }
-        
     }
 }
