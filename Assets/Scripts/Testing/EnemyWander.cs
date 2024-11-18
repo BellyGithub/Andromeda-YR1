@@ -24,6 +24,8 @@ public class EnemyWander : MonoBehaviour
         if (movingRight)
         {
             transform.Translate(Vector2.right * speed * dt);
+            transform.localScale = new Vector3(1, 1, 1);
+
             if (transform.position.x >= rightLimit)
             {
                 transform.position = new Vector3(rightLimit, transform.position.y, transform.position.z);
@@ -33,6 +35,7 @@ public class EnemyWander : MonoBehaviour
         else
         {
             transform.Translate(Vector2.left * speed * dt);
+            transform.localScale = new Vector3(-1, 1, 1);
             if (transform.position.x <= leftLimit)
             {
                 transform.position = new Vector3(leftLimit, transform.position.y, transform.position.z);
