@@ -21,17 +21,13 @@ public class HealthManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            isInvincible = true;
+            Respawn();
         }
         else
         {
             StartCoroutine(InvincibilityCoroutine());
         }
-    }
-    public void Die()
-    {
-        Debug.Log("You die");
-        Respawn();
     }
 
     public void RefreshHealthbar()
@@ -42,9 +38,12 @@ public class HealthManager : MonoBehaviour
 
     public void Respawn()
     {
+        Debug.Log("You die");
         transform.position = initialPosition;
         currentHealth = 100.0f;
         Debug.Log("Character has respawned at the initial position!");
+        isInvincible = false;
+        RefreshHealthbar();
     }
 
     IEnumerator InvincibilityCoroutine()
