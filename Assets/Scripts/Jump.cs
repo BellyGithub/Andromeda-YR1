@@ -28,6 +28,14 @@ public class Jump : MonoBehaviour
     {
         xMovement = Input.GetAxis("Horizontal");
         rb2D.linearVelocity = new Vector2(xMovement * movespeed, rb2D.linearVelocity.y);
+        if (xMovement < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (xMovement > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
         isGround = rb2D.IsTouchingLayers(ground);
 
         if(Input.GetKeyDown(KeyCode.Space) && isGround)
