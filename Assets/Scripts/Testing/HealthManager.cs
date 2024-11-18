@@ -21,6 +21,7 @@ public class HealthManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            isInvincible = true;
             Respawn();
         }
         else
@@ -41,6 +42,7 @@ public class HealthManager : MonoBehaviour
         transform.position = initialPosition;
         currentHealth = 100.0f;
         Debug.Log("Character has respawned at the initial position!");
+        isInvincible = false;
         RefreshHealthbar();
     }
 
