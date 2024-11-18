@@ -9,16 +9,29 @@ public class Jump : MonoBehaviour
 
     public float movespeed = 6;
     public LayerMask ground;
-
+    [SerializeField]
+    private bool _isrunning = false;
+    public bool IsRunning {get 
+    {
+        return _isrunning;
+    }
+    private set 
+    {
+        _isrunning = value;
+        animator.SetBool("isrunning",value);
+    }
+    }
     float xMovement;
     float jumpTime = 0.0f;
     bool isGround;
     PlayerGravitySwitch GSscript;
     GameObject GameManager;
+    Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         GameManager = GameObject.Find("PlayerCharacter");
         GSscript = GameManager.GetComponent<PlayerGravitySwitch>();
     }
