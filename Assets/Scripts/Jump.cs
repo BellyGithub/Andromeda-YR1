@@ -13,7 +13,6 @@ public class Jump : MonoBehaviour
     float xMovement;
     float jumpTime = 0.0f;
     bool isGround;
-
     PlayerGravitySwitch GSscript;
     GameObject GameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
