@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Jump : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Jump : MonoBehaviour
 
     public float movespeed = 6;
     public LayerMask ground;
+    
     [SerializeField]
     private bool _isrunning = false;
     public bool IsRunning {get 
@@ -19,6 +21,18 @@ public class Jump : MonoBehaviour
     {
         _isrunning = value;
         animator.SetBool("isrunning",value);
+    }
+    }
+    [SerializeField]
+    private bool _isattacking = false;
+    public bool IsAttacking{get 
+    {
+        return _isattacking;
+    }
+    private set 
+    {
+        _isattacking = value;
+        animator.SetBool("isattacking",value);
     }
     }
     float xMovement;
