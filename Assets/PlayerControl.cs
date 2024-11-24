@@ -31,7 +31,7 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         // Apply horizontal movement
-        rb.velocity = new Vector2(movementInput.x * speed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(movementInput.x * speed, rb.linearVelocity.y);
 
         // Flip character sprite based on movement direction
         if (!isFacingRight && movementInput.x > 0f)
@@ -59,13 +59,13 @@ public class PlayerControl : MonoBehaviour
         {
             // Jump in the direction opposite to gravity
             float jumpDirection = isGravityFlipped ? -1f : 1f;
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower * jumpDirection);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower * jumpDirection);
         }
 
-        if (context.canceled && Mathf.Abs(rb.velocity.y) > 0f)
+        if (context.canceled && Mathf.Abs(rb.linearVelocity.y) > 0f)
         {
             // Reduce jump height when jump is canceled
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
         }
     }
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 223453330855692567}
   - component: {fileID: 2753072948776659352}
   - component: {fileID: -6423997595381694132}
+  - component: {fileID: 4138830452160333320}
   m_Layer: 0
   m_Name: Beard Guy
   m_TagString: Untagged
@@ -201,3 +202,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4138830452160333320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681200147764401669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464ea8c88a16d1444b08ab0176bff0c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
