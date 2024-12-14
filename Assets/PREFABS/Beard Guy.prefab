@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2753072948776659352}
   - component: {fileID: -6423997595381694132}
   - component: {fileID: 4138830452160333320}
+  - component: {fileID: 2250837481401670093}
   m_Layer: 0
   m_Name: Beard Guy
   m_TagString: Untagged
@@ -100,7 +101,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4681200147764401669}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -118,7 +119,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &223453330855692567
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215,3 +216,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &2250837481401670093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681200147764401669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f623e69dbe64e349b9bbe479b71125c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+  healthManager: {fileID: 0}

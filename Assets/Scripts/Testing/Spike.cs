@@ -7,7 +7,7 @@ public class Spike : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            HealthManager healthManager = other.GetComponent<HealthManager>();
+            HealthManagerScript healthManager = other.GetComponent<HealthManagerScript>();
             if (healthManager != null)
             {
                 healthManager.TakeDamage(damage);
