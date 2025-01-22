@@ -241,6 +241,8 @@ MonoBehaviour:
   currentHealth: 0
   invincibilityDuration: 2
   healthbar: {fileID: 0}
+  audioSource: {fileID: 0}
+  hurtSoundClip: {fileID: 0}
 --- !u!95 &6422774993775972703
 Animator:
   serializedVersion: 7
