@@ -5,6 +5,8 @@ public class PlayerAttack : MonoBehaviour
 {
     public int attackDamage = 50; // Damage dealt to the enemy
     private GameObject currentEnemy; // The enemy currently inside the collider
+    private bool canAttack = true; // Whether the player is allowed to attack
+    private float attackCooldown = 1f; // Cooldown duration in seconds
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -26,7 +28,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void AttackEnemy(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && canAttack)
         {
             if (currentEnemy != null)
             {
@@ -35,6 +37,9 @@ public class PlayerAttack : MonoBehaviour
                 {
                     enemyHealth.TakeDamage(attackDamage);
                     Debug.Log($"Attacked {currentEnemy.name}, health remaining: {enemyHealth.CurrentHealth}");
+
+                    // Start cooldown
+                    StartCoroutine(AttackCooldown());
                 }
                 else
                 {
@@ -46,5 +51,12 @@ public class PlayerAttack : MonoBehaviour
                 Debug.Log("No enemy to attack!");
             }
         }
+    }
+
+    private System.Collections.IEnumerator AttackCooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
     }
 }
