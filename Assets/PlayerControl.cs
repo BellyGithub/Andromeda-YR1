@@ -18,6 +18,13 @@ public class PlayerControl : MonoBehaviour
     private Vector2 movementInput; // Store full movement input (Vector2)
     private bool _IsRunning = false;
 
+    [Header("Dashing Parameters")]
+    [SerializeField] private float dashingPower = 24f;
+    [SerializeField] private float dashingTime = 0.2f;
+    [SerializeField] private float dashingCooldown = 1f;
+    private bool canDash = true;
+    private bool isDashing;
+
     public bool IsRunning
     {
         get { return _IsRunning; }
@@ -30,6 +37,11 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         // Apply horizontal movement
         rb.linearVelocity = new Vector2(movementInput.x * speed, rb.linearVelocity.y);
 
@@ -84,6 +96,14 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (context.performed && canDash && !isDashing)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
     private bool IsGrounded()
     {
         // Check for ground regardless of gravity direction
@@ -99,5 +119,25 @@ public class PlayerControl : MonoBehaviour
         Vector3 localScale = transform.localScale;
         localScale.x *= -1f;
         transform.localScale = localScale;
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        // Set the dash velocity based on the direction the player is facing
+        float dashDirection = isFacingRight ? 1f : -1f;
+        rb.linearVelocity = new Vector2(dashDirection * dashingPower, 0f);
+
+        yield return new WaitForSeconds(dashingTime);
+
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }
