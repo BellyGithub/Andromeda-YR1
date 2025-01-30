@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
     private float detectionRadius = 10f;
 
     public GameObject bulletPrefab;
@@ -26,7 +26,8 @@ public class EnemyShoot : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        GameObject playerobj = GameObject.FindGameObjectWithTag("Player");
+        player = playerobj.transform;
     }
 
     // Update is called once per frame
