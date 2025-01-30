@@ -18,6 +18,8 @@ public class PlayerControl : MonoBehaviour
     private Vector2 movementInput;
     private bool _IsRunning = false;
     private bool _IsJumping = false;
+    private bool _IsDashing = false;
+    private bool _IsAttacking = false;
 
     [Header("Dashing Parameters")]
     [SerializeField] private float dashingPower = 24f;
@@ -25,6 +27,12 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float dashingCooldown = 1f;
     private bool canDash = true;
     private bool isDashing;
+
+    [Header("Attack Parameters")]
+    public int attackDamage = 50;
+    private GameObject currentEnemy;
+    private bool canAttack = true;
+    private float attackCooldown = 1f;
 
     public bool IsRunning
     {
@@ -46,46 +54,55 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    public bool IsDashing
+    {
+        get { return _IsDashing; }
+        private set
+        {
+            _IsDashing = value;
+            animator.SetBool("_IsDashing", value);
+        }
+    }
+
+    public bool IsAttacking
+    {
+        get { return _IsAttacking; }
+        private set
+        {
+            _IsAttacking = value;
+            animator.SetBool("_IsAttacking", value);
+        }
+    }
+
     void Update()
     {
-        if (isDashing)
-        {
-            return;
-        }
+        if (isDashing || _IsAttacking) return; // Skip normal movement while dashing or attacking
 
-        // Apply horizontal movement
-        rb.linearVelocity = new Vector2(movementInput.x * speed, rb.linearVelocity.y);
-        // Apply movement
-        rb.linearVelocity = new Vector2(movementInput.x * speed, rb.linearVelocity.y);
+        rb.velocity = new Vector2(movementInput.x * speed, rb.velocity.y);
 
-        // Check if player is grounded
         bool grounded = IsGrounded();
 
-        // Update Jumping Animation (only trigger when airborne)
         if (!grounded && !_IsJumping)
         {
-            IsJumping = true; // Triggers jump animation once
+            IsJumping = true;
         }
         else if (grounded && _IsJumping)
         {
-            IsJumping = false; // Reset jump when grounded
+            IsJumping = false;
         }
 
-        // Running Animation Logic
-        if (movementInput.x != 0)
+        if (movementInput.x != 0 && grounded)
         {
             IsRunning = true;
             animator.SetFloat("Speed", 1f);
         }
-        else
+        else if (grounded)
         {
-            // Ensure animation resets to Idle when stopping
             IsRunning = false;
             animator.SetFloat("Speed", 0f);
-            animator.Play("Idle", 0, 0f); // Force reset to Idle state
+            animator.Play("Idle", 0, 0f);
         }
 
-        // Flip character sprite
         if (!isFacingRight && movementInput.x > 0f) Flip();
         else if (isFacingRight && movementInput.x < 0f) Flip();
     }
@@ -93,18 +110,16 @@ public class PlayerControl : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
-
-        // Set running state (true if moving, false if stopped)
         IsRunning = movementInput.x != 0;
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && IsGrounded())
+        if (context.performed && IsGrounded() && !isDashing)
         {
             float jumpDirection = isGravityFlipped ? -1f : 1f;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower * jumpDirection);
-            IsJumping = true; // Triggers jump animation
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower * jumpDirection);
+            IsJumping = true;
         }
     }
 
@@ -125,8 +140,39 @@ public class PlayerControl : MonoBehaviour
     {
         if (context.performed && canDash && !isDashing)
         {
-            StartCoroutine(Dash());
+            StartCoroutine(DashCoroutine());
         }
+    }
+
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (context.performed && canAttack)
+        {
+            StartCoroutine(AttackCoroutine());
+        }
+    }
+
+    private IEnumerator AttackCoroutine()
+    {
+        canAttack = false;
+        IsAttacking = true;
+
+        yield return new WaitForSeconds(0.3f); // Delay for attack animation
+
+        if (currentEnemy != null)
+        {
+            EnemyHealth enemyHealth = currentEnemy.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(attackDamage);
+                Debug.Log($"Attacked {currentEnemy.name}, health remaining: {enemyHealth.CurrentHealth}");
+            }
+        }
+
+        IsAttacking = false;
+
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
     }
 
     private bool IsGrounded()
@@ -144,23 +190,43 @@ public class PlayerControl : MonoBehaviour
         transform.localScale = localScale;
     }
 
-    private IEnumerator Dash()
+    private IEnumerator DashCoroutine()
     {
         canDash = false;
         isDashing = true;
+        IsDashing = true;
+
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
 
-        // Set the dash velocity based on the direction the player is facing
         float dashDirection = isFacingRight ? 1f : -1f;
-        rb.linearVelocity = new Vector2(dashDirection * dashingPower, 0f);
+        rb.velocity = new Vector2(dashDirection * dashingPower, 0f);
 
         yield return new WaitForSeconds(dashingTime);
 
         rb.gravityScale = originalGravity;
         isDashing = false;
+        IsDashing = false;
 
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            currentEnemy = other.gameObject;
+            Debug.Log($"Enemy {currentEnemy.name} entered the trigger.");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log($"Enemy {currentEnemy.name} exited the trigger.");
+            currentEnemy = null;
+        }
     }
 }
