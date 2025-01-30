@@ -76,7 +76,7 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        if (isDashing || _IsAttacking) return; // Skip normal movement while dashing or attacking
+        if (isDashing || _IsAttacking) return; // Prevent movement when dashing or attacking
 
         rb.velocity = new Vector2(movementInput.x * speed, rb.velocity.y);
 
@@ -115,7 +115,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && IsGrounded() && !isDashing)
+        if (context.performed && IsGrounded() && !isDashing && !_IsAttacking) // Prevent jump during attack
         {
             float jumpDirection = isGravityFlipped ? -1f : 1f;
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower * jumpDirection);
@@ -138,7 +138,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && canDash && !isDashing)
+        if (context.performed && canDash && !isDashing && !_IsAttacking) // Prevent dash during attack
         {
             StartCoroutine(DashCoroutine());
         }
@@ -157,7 +157,7 @@ public class PlayerControl : MonoBehaviour
         canAttack = false;
         IsAttacking = true;
 
-        yield return new WaitForSeconds(0.3f); // Delay for attack animation
+        yield return new WaitForSeconds(0.1f); // Allow attack animation to start
 
         if (currentEnemy != null)
         {
@@ -165,13 +165,27 @@ public class PlayerControl : MonoBehaviour
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(attackDamage);
-                Debug.Log($"Attacked {currentEnemy.name}, health remaining: {enemyHealth.CurrentHealth}");
+                Debug.Log($"Attacked {currentEnemy?.name}, health remaining: {enemyHealth?.CurrentHealth}");
             }
+            else
+            {
+                Debug.LogError($"Enemy {currentEnemy?.name} has no EnemyHealth component.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No enemy to attack!");
+        }
+
+        yield return new WaitForSeconds(0.3f); // Allow attack animation to finish
+
+        // Ensure animation has finished before resetting
+        while (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            yield return null;
         }
 
         IsAttacking = false;
-
-        yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
     }
 
@@ -223,7 +237,7 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && currentEnemy == other.gameObject)
         {
             Debug.Log($"Enemy {currentEnemy.name} exited the trigger.");
             currentEnemy = null;
