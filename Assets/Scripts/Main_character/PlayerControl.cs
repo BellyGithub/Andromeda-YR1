@@ -56,7 +56,7 @@ public class PlayerControl : MonoBehaviour
         // Apply horizontal movement
         rb.linearVelocity = new Vector2(movementInput.x * speed, rb.linearVelocity.y);
         // Apply movement
-        rb.velocity = new Vector2(movementInput.x * speed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(movementInput.x * speed, rb.linearVelocity.y);
 
         // Check if player is grounded
         bool grounded = IsGrounded();
@@ -103,7 +103,7 @@ public class PlayerControl : MonoBehaviour
         if (context.performed && IsGrounded())
         {
             float jumpDirection = isGravityFlipped ? -1f : 1f;
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower * jumpDirection);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower * jumpDirection);
             IsJumping = true; // Triggers jump animation
         }
     }
