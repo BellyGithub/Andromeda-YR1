@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 1089610684}
   m_Layer: 0
   m_Name: Triangle
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -685,7 +685,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c5d6ce455c05a44b726e2013b7de70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1089610681}
   bulletPrefab: {fileID: 5051236626222908763, guid: cb58e65e9730e4840b30408a0bfbb1f6, type: 3}
   firePoint: {fileID: 84428345}
 --- !u!1 &1862333985

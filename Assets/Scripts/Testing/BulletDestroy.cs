@@ -2,8 +2,21 @@ using UnityEngine;
 
 public class BulletDestroy : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    int damage = 30;
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Player"))
+        {
+            HealthManagerScript healthManager = other.GetComponent<HealthManagerScript>();
+            if (healthManager != null)
+            {
+                healthManager.TakeDamage(damage);
+            }
+            else
+            {
+                Debug.LogWarning("Can't find healthManager");
+            }
+        }
         Destroy(gameObject);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
