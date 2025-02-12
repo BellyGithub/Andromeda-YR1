@@ -78,7 +78,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (isDashing || _IsAttacking) return; // Prevent movement when dashing or attacking
 
-        rb.velocity = new Vector2(movementInput.x * speed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(movementInput.x * speed, rb.linearVelocity.y);
 
         bool grounded = IsGrounded();
 
@@ -118,7 +118,7 @@ public class PlayerControl : MonoBehaviour
         if (context.performed && IsGrounded() && !isDashing && !_IsAttacking) // Prevent jump during attack
         {
             float jumpDirection = isGravityFlipped ? -1f : 1f;
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower * jumpDirection);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower * jumpDirection);
             IsJumping = true;
         }
     }
@@ -214,7 +214,7 @@ public class PlayerControl : MonoBehaviour
         rb.gravityScale = 0f;
 
         float dashDirection = isFacingRight ? 1f : -1f;
-        rb.velocity = new Vector2(dashDirection * dashingPower, 0f);
+        rb.linearVelocity = new Vector2(dashDirection * dashingPower, 0f);
 
         yield return new WaitForSeconds(dashingTime);
 
