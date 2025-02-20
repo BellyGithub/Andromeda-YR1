@@ -9,7 +9,7 @@ public class HealthManagerScript : MonoBehaviour
     public float currentHealth;
     public float invincibilityDuration = 2.0f;
     public Image healthbar;
-    private bool isInvincible = false;
+    public bool isInvincible = false;
     private float ratio = 1.0f;
     private Vector3 initialPosition;
 
@@ -22,25 +22,23 @@ public class HealthManagerScript : MonoBehaviour
         {
             return;
         }
-        else if (isInvincible == false)
-        {
-            audioSource.clip = hurtSoundClip;
-            audioSource.volume = 0.2f;
-            audioSource.Play();
-        }
+
+        audioSource.clip = hurtSoundClip;
+        audioSource.volume = 0.2f;
+        audioSource.Play();
         currentHealth -= damage;
         RefreshHealthbar();
         Debug.Log("health:" + currentHealth);
-
+        
         if (currentHealth <= 0)
         {
             
             isInvincible = true;
             Respawn();
         }
-        else
+        else if (!isInvincible)
         {
-            StartCoroutine(InvincibilityCoroutine());
+            StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
         }
     }
 
@@ -60,10 +58,16 @@ public class HealthManagerScript : MonoBehaviour
         RefreshHealthbar();
     }
 
-    IEnumerator InvincibilityCoroutine()
+    public void SetInvincibility(float duration)
+    {
+        Debug.Log("Invincible for " + duration);
+        StartCoroutine(InvincibilityCoroutine(duration));
+    }
+
+    private IEnumerator InvincibilityCoroutine(float duration)
     {
         isInvincible = true;
-        yield return new WaitForSeconds(invincibilityDuration);
+        yield return new WaitForSeconds(duration);
         isInvincible = false;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

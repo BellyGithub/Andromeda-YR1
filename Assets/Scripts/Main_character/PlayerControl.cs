@@ -21,6 +21,12 @@ public class PlayerControl : MonoBehaviour
     private bool _IsDashing = false;
     private bool _IsAttacking = false;
 
+    [Header("SOUNDS")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip jumpSoundClip;
+    [SerializeField] AudioClip hitSoundClip;
+    [SerializeField] AudioClip gravSwitchSoundClip;
+
     [Header("Dashing Parameters")]
     [SerializeField] private float dashingPower = 24f;
     [SerializeField] private float dashingTime = 0.2f;
@@ -30,9 +36,16 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Attack Parameters")]
     public int attackDamage = 50;
+    private HealthManagerScript healthManager;
     private GameObject currentEnemy;
     private bool canAttack = true;
     private float attackCooldown = 1f;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        healthManager = FindAnyObjectByType<HealthManagerScript>();
+    }
 
     public bool IsRunning
     {
@@ -117,6 +130,9 @@ public class PlayerControl : MonoBehaviour
     {
         if (context.performed && IsGrounded() && !isDashing && !_IsAttacking) // Prevent jump during attack
         {
+            audioSource.clip = jumpSoundClip;
+            audioSource.volume = 0.2f;
+            audioSource.Play();
             float jumpDirection = isGravityFlipped ? -1f : 1f;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower * jumpDirection);
             IsJumping = true;
@@ -127,6 +143,9 @@ public class PlayerControl : MonoBehaviour
     {
         if (context.performed)
         {
+            audioSource.clip = gravSwitchSoundClip;
+            audioSource.volume = 0.2f;
+            audioSource.Play();
             isGravityFlipped = !isGravityFlipped;
             rb.gravityScale *= -1;
 
@@ -164,6 +183,10 @@ public class PlayerControl : MonoBehaviour
             EnemyHealth enemyHealth = currentEnemy.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
+                audioSource.clip = hitSoundClip;
+                audioSource.volume = 0.3f;
+                audioSource.Play();
+                healthManager.SetInvincibility(attackCooldown);
                 enemyHealth.TakeDamage(attackDamage);
                 Debug.Log($"Attacked {currentEnemy?.name}, health remaining: {enemyHealth?.CurrentHealth}");
             }

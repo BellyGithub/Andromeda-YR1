@@ -7,6 +7,12 @@ public class PlayerAttack : MonoBehaviour
     private GameObject currentEnemy; // The enemy currently inside the collider
     private bool canAttack = true; // Whether the player is allowed to attack
     private float attackCooldown = 1f; // Cooldown duration in seconds
+    HealthManagerScript healthManager;
+
+    private void Start()
+    {
+        healthManager = FindAnyObjectByType<HealthManagerScript>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
