@@ -811,7 +811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 918096266}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1047069116
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2687223124855041176, guid: cbc2baea3453d3a4a99fa0bb7d33e309, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cbc2baea3453d3a4a99fa0bb7d33e309, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
