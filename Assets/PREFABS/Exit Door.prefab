@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8467001930559533967}
   - component: {fileID: 7680309055723236400}
   - component: {fileID: 1495659464173285127}
-  - component: {fileID: 9199797325692155333}
+  - component: {fileID: 2021530825440381846}
   m_Layer: 0
   m_Name: Exit Door
   m_TagString: Untagged
@@ -123,7 +123,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.55998653, y: 0.7893926}
+  m_Offset: {x: 0.023605347, y: -0.16067025}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,9 +133,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.2800275, y: 3.9787853}
+  m_Size: {x: 2.1740007, y: 2.1345468}
   m_EdgeRadius: 0
---- !u!114 &9199797325692155333
+--- !u!114 &2021530825440381846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6705603023835869318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890ca78405c231b41a03a42eb1bc6247, type: 3}
+  m_Script: {fileID: 11500000, guid: f9cb928221bc797439ed40514a360883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
+  gameManager: {fileID: 0}
