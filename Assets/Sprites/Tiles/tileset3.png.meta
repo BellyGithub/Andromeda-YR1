@@ -127,12 +127,12 @@ TextureImporter:
       name: tileset3_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 42
-        width: 18
-        height: 18
+        x: 6
+        y: 43
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -149,12 +149,12 @@ TextureImporter:
       name: tileset3_1
       rect:
         serializedVersion: 2
-        x: 5
-        y: 25
-        width: 18
-        height: 18
+        x: 6
+        y: 26
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -171,12 +171,12 @@ TextureImporter:
       name: tileset3_2
       rect:
         serializedVersion: 2
-        x: 22
-        y: 42
-        width: 18
-        height: 18
+        x: 23
+        y: 43
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -193,12 +193,12 @@ TextureImporter:
       name: tileset3_3
       rect:
         serializedVersion: 2
-        x: 22
-        y: 25
-        width: 18
-        height: 18
+        x: 23
+        y: 26
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -215,12 +215,12 @@ TextureImporter:
       name: tileset3_4
       rect:
         serializedVersion: 2
-        x: 39
-        y: 42
-        width: 18
-        height: 18
+        x: 40
+        y: 43
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -237,12 +237,12 @@ TextureImporter:
       name: tileset3_5
       rect:
         serializedVersion: 2
-        x: 39
-        y: 25
-        width: 18
-        height: 18
+        x: 40
+        y: 26
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -259,12 +259,12 @@ TextureImporter:
       name: tileset3_6
       rect:
         serializedVersion: 2
-        x: 5
-        y: 8
-        width: 18
-        height: 18
+        x: 6
+        y: 9
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -281,12 +281,12 @@ TextureImporter:
       name: tileset3_7
       rect:
         serializedVersion: 2
-        x: 22
-        y: 8
-        width: 18
-        height: 18
+        x: 23
+        y: 9
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -303,12 +303,12 @@ TextureImporter:
       name: tileset3_8
       rect:
         serializedVersion: 2
-        x: 39
-        y: 8
-        width: 18
-        height: 18
+        x: 40
+        y: 9
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -325,7 +325,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a141f8a8f414a2e4b8af05054914d642
     internalID: 0
     vertices: []
     indices: 
