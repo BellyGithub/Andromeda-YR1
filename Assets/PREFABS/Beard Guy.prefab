@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2250837481401670093}
   m_Layer: 0
   m_Name: Beard Guy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  enemyScore: 100
 --- !u!114 &2250837481401670093
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -166,6 +166,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -173,12 +186,12 @@ TextureImporter:
       name: tileslvl2_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 51
-        width: 18
-        height: 18
+        x: 4
+        y: 52
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -195,12 +208,12 @@ TextureImporter:
       name: tileslvl2_1
       rect:
         serializedVersion: 2
-        x: 3
-        y: 34
-        width: 18
-        height: 18
+        x: 4
+        y: 35
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -217,12 +230,12 @@ TextureImporter:
       name: tileslvl2_2
       rect:
         serializedVersion: 2
-        x: 20
-        y: 51
-        width: 18
-        height: 18
+        x: 21
+        y: 52
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -239,13 +252,13 @@ TextureImporter:
       name: tileslvl2_3
       rect:
         serializedVersion: 2
-        x: 20
+        x: 21
         y: 34
-        width: 18
-        height: 18
+        width: 16
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
@@ -261,12 +274,12 @@ TextureImporter:
       name: tileslvl2_4
       rect:
         serializedVersion: 2
-        x: 37
-        y: 51
-        width: 18
-        height: 18
+        x: 38
+        y: 52
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -283,12 +296,12 @@ TextureImporter:
       name: tileslvl2_5
       rect:
         serializedVersion: 2
-        x: 37
-        y: 34
-        width: 18
-        height: 18
+        x: 38
+        y: 35
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -305,12 +318,12 @@ TextureImporter:
       name: tileslvl2_6
       rect:
         serializedVersion: 2
-        x: 54
-        y: 51
-        width: 18
-        height: 18
+        x: 55
+        y: 52
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -327,12 +340,12 @@ TextureImporter:
       name: tileslvl2_7
       rect:
         serializedVersion: 2
-        x: 54
-        y: 34
-        width: 18
-        height: 18
+        x: 55
+        y: 35
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -349,12 +362,12 @@ TextureImporter:
       name: tileslvl2_8
       rect:
         serializedVersion: 2
-        x: 71
-        y: 51
-        width: 18
-        height: 18
+        x: 72
+        y: 52
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -371,12 +384,12 @@ TextureImporter:
       name: tileslvl2_9
       rect:
         serializedVersion: 2
-        x: 71
-        y: 34
-        width: 18
-        height: 18
+        x: 72
+        y: 35
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -393,12 +406,12 @@ TextureImporter:
       name: tileslvl2_10
       rect:
         serializedVersion: 2
-        x: 3
-        y: 17
-        width: 18
-        height: 18
+        x: 4
+        y: 18
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -415,12 +428,12 @@ TextureImporter:
       name: tileslvl2_11
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 18
-        height: 18
+        x: 4
+        y: 1
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -437,12 +450,12 @@ TextureImporter:
       name: tileslvl2_12
       rect:
         serializedVersion: 2
-        x: 20
-        y: 17
-        width: 18
-        height: 18
+        x: 21
+        y: 18
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -459,12 +472,12 @@ TextureImporter:
       name: tileslvl2_13
       rect:
         serializedVersion: 2
-        x: 20
-        y: 0
-        width: 18
-        height: 18
+        x: 21
+        y: 1
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -481,12 +494,12 @@ TextureImporter:
       name: tileslvl2_14
       rect:
         serializedVersion: 2
-        x: 37
-        y: 17
-        width: 18
-        height: 18
+        x: 38
+        y: 18
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -503,12 +516,12 @@ TextureImporter:
       name: tileslvl2_15
       rect:
         serializedVersion: 2
-        x: 37
-        y: 0
-        width: 18
-        height: 18
+        x: 38
+        y: 1
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -525,12 +538,12 @@ TextureImporter:
       name: tileslvl2_16
       rect:
         serializedVersion: 2
-        x: 54
-        y: 17
-        width: 18
-        height: 18
+        x: 55
+        y: 18
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -547,12 +560,12 @@ TextureImporter:
       name: tileslvl2_17
       rect:
         serializedVersion: 2
-        x: 54
-        y: 0
-        width: 18
-        height: 18
+        x: 55
+        y: 1
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -569,12 +582,12 @@ TextureImporter:
       name: tileslvl2_18
       rect:
         serializedVersion: 2
-        x: 71
-        y: 17
-        width: 18
-        height: 18
+        x: 72
+        y: 18
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -591,12 +604,12 @@ TextureImporter:
       name: tileslvl2_19
       rect:
         serializedVersion: 2
-        x: 71
-        y: 0
-        width: 18
-        height: 18
+        x: 72
+        y: 1
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -613,7 +626,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 873e08e6e2a64ee46a8130d80c7256e2
     internalID: 0
     vertices: []
     indices: 

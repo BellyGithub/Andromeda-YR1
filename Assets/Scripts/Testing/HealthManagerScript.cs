@@ -58,6 +58,16 @@ public class HealthManagerScript : MonoBehaviour
         RefreshHealthbar();
     }
 
+    public void heal(float healAmount)
+    {
+        currentHealth += healAmount;
+        if (currentHealth >= 100)
+        {
+            currentHealth = maxHealth;
+        }
+        RefreshHealthbar();
+    }
+
     public void SetInvincibility(float duration)
     {
         Debug.Log("Invincible for " + duration);
