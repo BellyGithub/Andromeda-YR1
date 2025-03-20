@@ -5,6 +5,7 @@ public class HealingStation : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip healSoundClip;
     [SerializeField] private HealthManagerScript HealthManager;
+    [SerializeField] private float healAmount = 50.0f;
     private bool canUse;
 
     void Start()
@@ -19,7 +20,7 @@ public class HealingStation : MonoBehaviour
         // Heals player
         if (other.CompareTag("Player") && canUse)
         {
-            HealthManager.heal(25f);
+            HealthManager.heal(healAmount);
             audioSource.clip = healSoundClip;
             audioSource.volume = 0.2f;
             audioSource.Play();

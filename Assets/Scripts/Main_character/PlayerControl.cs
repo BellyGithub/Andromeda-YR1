@@ -141,7 +141,7 @@ public class PlayerControl : MonoBehaviour
 
     public void SwitchGravity(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !isDashing)
         {
             audioSource.clip = gravSwitchSoundClip;
             audioSource.volume = 0.2f;
