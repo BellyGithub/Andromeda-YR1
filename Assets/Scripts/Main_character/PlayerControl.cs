@@ -11,7 +11,7 @@ public class PlayerControl : MonoBehaviour
     public LayerMask groundLayer;
 
     public float speed = 8f;
-    public float jumpingPower = 16f;
+    //public float jumpingPower = 16f;
     private bool isFacingRight = true;
     private bool isGravityFlipped = false;
 
@@ -20,6 +20,13 @@ public class PlayerControl : MonoBehaviour
     private bool _IsJumping = false;
     private bool _IsDashing = false;
     private bool _IsAttacking = false;
+
+    [Header("Jump Parameters")]
+    [SerializeField] private float minJumpPower = 10f;
+    [SerializeField] private float maxJumpPower = 20f;
+    [SerializeField] private float jumpHoldTimeMax = 0.35f;
+    private bool jumpHeld = false;
+    private float jumpTimeCounter = 0f;
 
     [Header("SOUNDS")]
     [SerializeField] AudioSource audioSource;
@@ -118,6 +125,14 @@ public class PlayerControl : MonoBehaviour
 
         if (!isFacingRight && movementInput.x > 0f) Flip();
         else if (isFacingRight && movementInput.x < 0f) Flip();
+
+        if (jumpHeld && jumpTimeCounter > 0)
+        {
+            float jumpDirection = isGravityFlipped ? -1f : 1f;
+            float extraJumpVelocity = (maxJumpPower - minJumpPower) / jumpHoldTimeMax * Time.deltaTime;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y + extraJumpVelocity * jumpDirection);
+            jumpTimeCounter -= Time.deltaTime;
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -130,12 +145,19 @@ public class PlayerControl : MonoBehaviour
     {
         if (context.performed && IsGrounded() && !isDashing && !_IsAttacking) // Prevent jump during attack
         {
+            jumpHeld = true;
+            jumpTimeCounter = jumpHoldTimeMax;
+            float jumpDirection = isGravityFlipped ? -1f : 1f;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, minJumpPower * jumpDirection);
+            IsJumping = true;
             audioSource.clip = jumpSoundClip;
             audioSource.volume = 0.2f;
             audioSource.Play();
-            float jumpDirection = isGravityFlipped ? -1f : 1f;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower * jumpDirection);
-            IsJumping = true;
+        }
+
+        if (context.canceled)
+        {
+            jumpHeld = false;
         }
     }
 
