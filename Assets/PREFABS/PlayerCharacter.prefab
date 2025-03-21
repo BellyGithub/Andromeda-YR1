@@ -386,6 +386,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6013759b-9b57-4bb6-9b73-226fd5304f48
     m_ActionName: 'Player/Attack_0[/XInputControllerWindows/rightShoulder,/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8391649772568660033}
+        m_TargetAssemblyTypeName: PlayerControl, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c8f4d2e4-0d1e-4220-b7a1-6f771d9f909d
+    m_ActionName: 'Player/Pause[/Keyboard/escape,/XInputControllerWindows/start]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -410,7 +426,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   speed: 10
-  jumpingPower: 16
+  minJumpPower: 10
+  maxJumpPower: 20
+  jumpHoldTimeMax: 0.35
   audioSource: {fileID: 0}
   jumpSoundClip: {fileID: 8300000, guid: aed403026f0424541adb802676a02707, type: 3}
   hitSoundClip: {fileID: 8300000, guid: 5aad76a08200c744e8ef3b3010823a75, type: 3}

@@ -6,12 +6,14 @@ public class HealingStation : MonoBehaviour
     [SerializeField] AudioClip healSoundClip;
     [SerializeField] private HealthManagerScript HealthManager;
     [SerializeField] private float healAmount = 50.0f;
+    UIManager uiManager;
     private bool canUse;
 
     void Start()
     {
         HealthManager = FindAnyObjectByType<HealthManagerScript>();
         audioSource = GetComponent<AudioSource>();
+        uiManager = FindAnyObjectByType<UIManager>();
         canUse = true;
     }
 
@@ -22,7 +24,7 @@ public class HealingStation : MonoBehaviour
         {
             HealthManager.heal(healAmount);
             audioSource.clip = healSoundClip;
-            audioSource.volume = 0.2f;
+            audioSource.volume = uiManager.volume;
             audioSource.Play();
             Debug.Log("Player healed!");
             // Disables use of healing station (Only heals player once)

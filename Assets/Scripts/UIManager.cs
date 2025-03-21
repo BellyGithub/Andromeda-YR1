@@ -1,19 +1,60 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
     public GameObject levelCompletePanel; // UI Panel to show when level is completed
+    public GameObject pauseMenu;
+    public GameObject optionsMenu;
+    public UnityEngine.UI.Slider volumeSlider;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timeText;
 
+    public static bool GamePaused = false;
+    public float volume = 0.5f;
     private string nextSceneName;
     private bool isLevelCompleted = false;
 
     void Start()
     {
+        volumeSlider.value = volume;
+        GamePaused = false; // In case of restart
         levelCompletePanel.SetActive(false); // Hide menu at start
+        pauseMenu.SetActive(false); // Hide menu at start
+        optionsMenu.SetActive(false); // Hide menu at start
+    }
+
+    // Method to show/hide pause menu
+    public void PauseMenuFunction()
+    {
+        if (GamePaused)
+        {
+            Resume();
+        }
+        else if (!GamePaused)
+        {
+            Pause();
+        }
+
+        // Resume Game
+        void Resume()
+        {
+            volume = volumeSlider.value;
+            pauseMenu.SetActive(false);
+            optionsMenu.SetActive(false);
+            Time.timeScale = 1f;
+            GamePaused = false;
+        }
+        
+        // Pause Game
+        void Pause()
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            GamePaused = true;
+        }
     }
 
     // This method now accepts 3 arguments: score, time, and next scene name
@@ -55,6 +96,13 @@ public class UIManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f; // Resume game time
-        SceneManager.LoadScene("MainMenuScene"); // Change this to your actual main menu scene name
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
+    // Button function to show options menu
+    public void showOptions()
+    {
+        optionsMenu.SetActive(true);
+        pauseMenu.SetActive(false);
     }
 }

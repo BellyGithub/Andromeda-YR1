@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     public Animator animator;
     public Transform groundCheck;
     public LayerMask groundLayer;
+    UIManager uiManager;
 
     public float speed = 8f;
     //public float jumpingPower = 16f;
@@ -52,6 +53,7 @@ public class PlayerControl : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         healthManager = FindAnyObjectByType<HealthManagerScript>();
+        uiManager = FindAnyObjectByType<UIManager>();
     }
 
     public bool IsRunning
@@ -135,6 +137,11 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    public void Pause(InputAction.CallbackContext context) 
+    {
+        uiManager.PauseMenuFunction();
+    }
+
     public void Move(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
@@ -143,7 +150,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && IsGrounded() && !isDashing && !_IsAttacking) // Prevent jump during attack
+        if (context.performed && IsGrounded() && !isDashing && !_IsAttacking && UIManager.GamePaused == false) // Prevent jump during attack
         {
             jumpHeld = true;
             jumpTimeCounter = jumpHoldTimeMax;
@@ -151,7 +158,7 @@ public class PlayerControl : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, minJumpPower * jumpDirection);
             IsJumping = true;
             audioSource.clip = jumpSoundClip;
-            audioSource.volume = 0.2f;
+            audioSource.volume = uiManager.volume;
             audioSource.Play();
         }
 
@@ -163,10 +170,10 @@ public class PlayerControl : MonoBehaviour
 
     public void SwitchGravity(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDashing)
+        if (context.performed && !isDashing && UIManager.GamePaused == false)
         {
             audioSource.clip = gravSwitchSoundClip;
-            audioSource.volume = 0.2f;
+            audioSource.volume = uiManager.volume;
             audioSource.Play();
             isGravityFlipped = !isGravityFlipped;
             rb.gravityScale *= -1;
@@ -179,7 +186,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && canDash && !isDashing && !_IsAttacking) // Prevent dash during attack
+        if (context.performed && canDash && !isDashing && !_IsAttacking && UIManager.GamePaused == false) // Prevent dash during attack
         {
             StartCoroutine(DashCoroutine());
         }
@@ -187,7 +194,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed && canAttack)
+        if (context.performed && canAttack && UIManager.GamePaused == false)
         {
             StartCoroutine(AttackCoroutine());
         }
@@ -206,7 +213,7 @@ public class PlayerControl : MonoBehaviour
             if (enemyHealth != null)
             {
                 audioSource.clip = hitSoundClip;
-                audioSource.volume = 0.3f;
+                audioSource.volume = uiManager.volume;
                 audioSource.Play();
                 healthManager.SetInvincibility(attackCooldown);
                 enemyHealth.TakeDamage(attackDamage);
