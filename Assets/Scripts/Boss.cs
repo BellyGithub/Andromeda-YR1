@@ -47,6 +47,7 @@ public class Boss : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Check if the boss collides with a wall
+
         if (other.gameObject.CompareTag("Wall"))
         {
             rb.linearVelocity = Vector2.zero;
