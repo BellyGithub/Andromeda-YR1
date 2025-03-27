@@ -3,10 +3,12 @@ using UnityEngine;
 public class WallScript : MonoBehaviour
 {
     [SerializeField] private GameObject BossWalls;
+    [SerializeField] Boss bossScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        bossScript = FindAnyObjectByType <Boss>();
         if (BossWalls != null)
             BossWalls.SetActive(false);
         else Debug.Log("can't find boss walls");
@@ -26,6 +28,7 @@ public class WallScript : MonoBehaviour
             if (BossWalls != null)
             {
                 BossWalls.SetActive(true);
+                bossScript.bossAwake();
             }
             else Debug.Log("can't find boss walls");
         }

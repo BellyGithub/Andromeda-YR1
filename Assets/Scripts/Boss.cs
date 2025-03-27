@@ -1,14 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
-    public int health = 1000;
+    public float maxHealth = 1000.0f;
+    public float health;
+    private float ratio = 1.0f;
+    [SerializeField] GameObject bossBarCanvas;
+    public Image bossBar;
     [SerializeField] private int damage = 25;
     public float chargeSpeed = 10f;
     public float waitTime = 10f;
 
     private bool isChargingLeft = true;
     private bool isWaiting = false;
+    private bool idle = true;
     private float waitTimer = 0f;
 
     private Rigidbody2D rb;
@@ -16,6 +22,8 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
+        bossBarCanvas.SetActive(false);
+        health = maxHealth;
         healthManager = FindAnyObjectByType<HealthManagerScript>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -32,10 +40,16 @@ public class Boss : MonoBehaviour
                 isChargingLeft = !isChargingLeft; // Switch direction
             }
         }
-        else
+        else if(!idle)
         {
             Charge();
         }
+    }
+
+    public void bossAwake()
+    {
+        idle = false;
+        bossBarCanvas.SetActive(true);
     }
 
     void Charge()
@@ -64,15 +78,21 @@ public class Boss : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        RefreshHealthbar();
         if (health <= 0)
         {
             Die();
         }
     }
 
+    public void RefreshHealthbar()
+    {
+        ratio = health / maxHealth;
+        bossBar.fillAmount = ratio;
+    }
+
     void Die()
     {
-        // Handle boss death (e.g., play animation, destroy object, etc.)
         Destroy(gameObject);
     }
 }

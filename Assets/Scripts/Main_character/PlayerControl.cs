@@ -210,6 +210,7 @@ public class PlayerControl : MonoBehaviour
         if (currentEnemy != null)
         {
             EnemyHealth enemyHealth = currentEnemy.GetComponent<EnemyHealth>();
+            Boss boss = currentEnemy.GetComponent<Boss>();
             if (enemyHealth != null)
             {
                 audioSource.clip = hitSoundClip;
@@ -218,6 +219,14 @@ public class PlayerControl : MonoBehaviour
                 healthManager.SetInvincibility(attackCooldown);
                 enemyHealth.TakeDamage(attackDamage);
                 Debug.Log($"Attacked {currentEnemy?.name}, health remaining: {enemyHealth?.CurrentHealth}");
+            }
+            else if (boss != null)
+            {
+                audioSource.clip = hitSoundClip;
+                audioSource.volume = uiManager.volume;
+                audioSource.Play();
+                healthManager.SetInvincibility(attackCooldown);
+                boss.TakeDamage(attackDamage);
             }
             else
             {

@@ -11,7 +11,7 @@ public class EnemyHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
-        scoreScript = FindObjectOfType<Score>(); // Find Score script in the scene
+        scoreScript = FindAnyObjectByType<Score>(); // Find Score script in the scene
     }
 
     public void TakeDamage(int damage)
