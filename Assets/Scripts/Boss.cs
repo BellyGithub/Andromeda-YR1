@@ -20,8 +20,15 @@ public class Boss : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private HealthManagerScript healthManager;
 
+    [Header("SOUNDS")]
+    [SerializeField] AudioSource audioSource;
+    UIManager uiManager;
+    [SerializeField] AudioClip bossMusic;
+
     void Start()
     {
+        uiManager = FindAnyObjectByType<UIManager>();
+        audioSource = GetComponent<AudioSource>();
         bossBarCanvas.SetActive(false);
         health = maxHealth;
         healthManager = FindAnyObjectByType<HealthManagerScript>();
@@ -48,8 +55,15 @@ public class Boss : MonoBehaviour
 
     public void bossAwake()
     {
-        idle = false;
-        bossBarCanvas.SetActive(true);
+        if (idle)
+        {
+            idle = false;
+            audioSource.clip = bossMusic;
+            audioSource.volume = uiManager.volume;
+            audioSource.Play();
+            bossBarCanvas.SetActive(true);
+        }
+        
     }
 
     void Charge()
@@ -93,6 +107,7 @@ public class Boss : MonoBehaviour
 
     void Die()
     {
+        bossBarCanvas.SetActive(false);
         Destroy(gameObject);
     }
 }
