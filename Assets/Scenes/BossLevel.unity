@@ -2189,14 +2189,16 @@ MonoBehaviour:
   bossBar: {fileID: 577284333}
   chargeSpeed: 10
   baseWaitTimeBetweenAttacks: 4
+  idle: 1
   projectilePrefab: {fileID: 302881288860797996, guid: 833cf8dbab57119428250e7894ee4c7b, type: 3}
   projectileSpeed: 8
   projectileSpawnPoint: {fileID: 1880604523}
   attackWindupTime: 0.8
   chargeDamage: 25
-  chargeWindupSound: {fileID: 0}
-  shootWindupSound: {fileID: 0}
-  shootSound: {fileID: 0}
+  chargeWindupSound: {fileID: 8300000, guid: a18e1371fa4165943abc76eb61be9e5e, type: 3}
+  shootWindupSound: {fileID: 8300000, guid: 407b76a83daf749499115afd361bd48c, type: 3}
+  shootSound: {fileID: 8300000, guid: 25d2efa7ddb062f43ba249669a1a316f, type: 3}
+  chargeAttackSound: {fileID: 8300000, guid: c795ae65fb635134cb8188e37ddfbb63, type: 3}
   volume: 0.5
 --- !u!50 &976871326
 Rigidbody2D:

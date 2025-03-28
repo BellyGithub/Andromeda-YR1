@@ -9,19 +9,22 @@ public class Boss : MonoBehaviour
     [SerializeField] GameObject bossBarCanvas;
     public Image bossBar;
     public float chargeSpeed = 10f;
-    public float baseWaitTimeBetweenAttacks = 4f; // Increased from 3f
+    public float baseWaitTimeBetweenAttacks = 4f;
+    public bool idle = true;
 
     [Header("Attack Settings")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileSpeed = 8f;
     [SerializeField] private Transform projectileSpawnPoint;
-    [SerializeField] private float attackWindupTime = 0.8f; // Time to warn before attacking
-    [SerializeField] private int chargeDamage = 25; // Specific damage for charge attack
+    [SerializeField] private float attackWindupTime = 0.8f;
+    [SerializeField] private int chargeDamage = 25;
+    [SerializeField] private float projectileSpawnOffset = 1.44f;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip chargeWindupSound;
     [SerializeField] private AudioClip shootWindupSound;
     [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioClip chargeAttackSound;
     private AudioSource audioSource;
     public float volume = 0.5f;
 
@@ -32,11 +35,9 @@ public class Boss : MonoBehaviour
     private Transform player;
     private SpriteRenderer spriteRenderer;
     private HealthManagerScript healthManager;
-    private UIManager uiManager;
 
     void Start()
     {
-        uiManager = FindAnyObjectByType<UIManager>();
         audioSource = GetComponent<AudioSource>();
         bossBarCanvas.SetActive(false);
         health = maxHealth;
@@ -66,7 +67,13 @@ public class Boss : MonoBehaviour
         // Flip sprite based on player position
         if (player != null)
         {
-            spriteRenderer.flipX = player.position.x > transform.position.x;
+            bool shouldFaceRight = player.position.x > transform.position.x;
+            spriteRenderer.flipX = shouldFaceRight;
+
+            // Adjust projectile spawn position
+            Vector3 spawnPosition = transform.position;
+            spawnPosition.x += shouldFaceRight ? projectileSpawnOffset : -projectileSpawnOffset;
+            projectileSpawnPoint.position = spawnPosition;
         }
     }
 
@@ -74,6 +81,7 @@ public class Boss : MonoBehaviour
     {
         if (!bossBarCanvas.activeSelf)
         {
+            idle = false;
             bossBarCanvas.SetActive(true);
             ChooseNextAttack();
         }
@@ -106,7 +114,6 @@ public class Boss : MonoBehaviour
             audioSource.PlayOneShot(chargeWindupSound);
         }
 
-        // Visual warning (you could add particle effects here)
         yield return new WaitForSeconds(attackWindupTime);
 
         // Execute attack
@@ -123,7 +130,6 @@ public class Boss : MonoBehaviour
             audioSource.PlayOneShot(shootWindupSound);
         }
 
-        // Visual warning (you could add particle effects here)
         yield return new WaitForSeconds(attackWindupTime);
 
         // Execute attack
@@ -135,6 +141,7 @@ public class Boss : MonoBehaviour
     void ChargeAttack()
     {
         Debug.Log("Charging!");
+        audioSource.PlayOneShot(chargeAttackSound);
         Vector2 direction = (player.position - transform.position).normalized;
         rb.linearVelocity = direction * chargeSpeed;
 
@@ -167,7 +174,6 @@ public class Boss : MonoBehaviour
         // Charge attack collision
         if (other.gameObject.CompareTag("Player") && rb.linearVelocity.magnitude > 0.1f)
         {
-            // Apply charge-specific damage
             healthManager.TakeDamage(chargeDamage);
             rb.linearVelocity = Vector2.zero;
             CancelInvoke("StopCharge");

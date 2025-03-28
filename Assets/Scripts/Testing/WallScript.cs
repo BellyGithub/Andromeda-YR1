@@ -26,9 +26,10 @@ public class WallScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (BossWalls != null)
+            if (BossWalls != null && bossScript.idle)
             {
                 audioSource.clip = bossMusic;
+                audioSource.loop = true;
                 audioSource.Play();
                 BossWalls.SetActive(true);
                 bossScript.bossAwake();
