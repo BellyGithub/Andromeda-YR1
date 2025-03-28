@@ -13,12 +13,17 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI timeText;
 
     public static bool GamePaused = false;
-    public float volume = 0.5f;
+    public static float volume = 0.5f;
     private string nextSceneName;
     private bool isLevelCompleted = false;
 
     void Start()
     {
+        // Initialize volume from PlayerPrefs if available
+        if (PlayerPrefs.HasKey("GameVolume"))
+        {
+            volume = PlayerPrefs.GetFloat("GameVolume");
+        }
         volumeSlider.value = volume;
         GamePaused = false; // In case of restart
         levelCompletePanel.SetActive(false); // Hide menu at start
@@ -89,6 +94,23 @@ public class UIManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Next scene name is not set! Make sure ShowLevelComplete() is called with a valid scene name.");
+        }
+    }
+
+    public void UpdateVolume()
+    {
+        volume = volumeSlider.value;
+        PlayerPrefs.SetFloat("GameVolume", volume); // Save volume preference
+        PlayerPrefs.Save();
+        UpdateAllAudioSources();
+    }
+
+    void UpdateAllAudioSources()
+    {
+        AudioSource[] audioSources = FindObjectsOfType<AudioSource>(true); // Include inactive objects
+        foreach (AudioSource source in audioSources)
+        {
+            source.volume = volume;
         }
     }
 

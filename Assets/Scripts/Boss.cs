@@ -8,22 +8,31 @@ public class Boss : MonoBehaviour
     private float ratio = 1.0f;
     [SerializeField] GameObject bossBarCanvas;
     public Image bossBar;
-    [SerializeField] private int damage = 25;
     public float chargeSpeed = 10f;
-    public float waitTime = 10f;
+    public float baseWaitTimeBetweenAttacks = 4f; // Increased from 3f
 
-    private bool isChargingLeft = true;
-    private bool isWaiting = false;
-    private bool idle = true;
-    private float waitTimer = 0f;
+    [Header("Attack Settings")]
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float projectileSpeed = 8f;
+    [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private float attackWindupTime = 0.8f; // Time to warn before attacking
+    [SerializeField] private int chargeDamage = 25; // Specific damage for charge attack
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip chargeWindupSound;
+    [SerializeField] private AudioClip shootWindupSound;
+    [SerializeField] private AudioClip shootSound;
+    private AudioSource audioSource;
+    public float volume = 0.5f;
+
+    private bool isAttacking = false;
+    private bool isWindingUp = false;
+    private float attackCooldownTimer = 0f;
     private Rigidbody2D rb;
-    [SerializeField] private HealthManagerScript healthManager;
-
-    [Header("SOUNDS")]
-    [SerializeField] AudioSource audioSource;
-    UIManager uiManager;
-    [SerializeField] AudioClip bossMusic;
+    private Transform player;
+    private SpriteRenderer spriteRenderer;
+    private HealthManagerScript healthManager;
+    private UIManager uiManager;
 
     void Start()
     {
@@ -33,59 +42,142 @@ public class Boss : MonoBehaviour
         health = maxHealth;
         healthManager = FindAnyObjectByType<HealthManagerScript>();
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
     {
-        if (isWaiting)
+        if (audioSource.volume != volume)
         {
-            waitTimer += Time.deltaTime;
-            if (waitTimer >= waitTime)
+            audioSource.volume = volume;
+        }
+        if (isAttacking && !isWindingUp)
+        {
+            attackCooldownTimer += Time.deltaTime;
+            if (attackCooldownTimer >= baseWaitTimeBetweenAttacks)
             {
-                isWaiting = false;
-                waitTimer = 0f;
-                isChargingLeft = !isChargingLeft; // Switch direction
+                isAttacking = false;
+                attackCooldownTimer = 0f;
+                ChooseNextAttack();
             }
         }
-        else if(!idle)
+
+        // Flip sprite based on player position
+        if (player != null)
         {
-            Charge();
+            spriteRenderer.flipX = player.position.x > transform.position.x;
         }
     }
 
     public void bossAwake()
     {
-        if (idle)
+        if (!bossBarCanvas.activeSelf)
         {
-            idle = false;
-            audioSource.clip = bossMusic;
-            audioSource.volume = uiManager.volume;
-            audioSource.Play();
             bossBarCanvas.SetActive(true);
+            ChooseNextAttack();
         }
-        
     }
 
-    void Charge()
+    void ChooseNextAttack()
     {
-        Vector2 direction = isChargingLeft ? Vector2.left : Vector2.right;
+        if (isAttacking) return;
+
+        // Start windup phase
+        isWindingUp = true;
+        int attackType = Random.Range(0, 2); // 0 or 1
+
+        switch (attackType)
+        {
+            case 0:
+                StartCoroutine(ChargeWindup());
+                break;
+            case 1:
+                StartCoroutine(ShootWindup());
+                break;
+        }
+    }
+
+    System.Collections.IEnumerator ChargeWindup()
+    {
+        // Play charge warning sound
+        if (chargeWindupSound != null)
+        {
+            audioSource.PlayOneShot(chargeWindupSound);
+        }
+
+        // Visual warning (you could add particle effects here)
+        yield return new WaitForSeconds(attackWindupTime);
+
+        // Execute attack
+        isWindingUp = false;
+        isAttacking = true;
+        ChargeAttack();
+    }
+
+    System.Collections.IEnumerator ShootWindup()
+    {
+        // Play shoot warning sound
+        if (shootWindupSound != null)
+        {
+            audioSource.PlayOneShot(shootWindupSound);
+        }
+
+        // Visual warning (you could add particle effects here)
+        yield return new WaitForSeconds(attackWindupTime);
+
+        // Execute attack
+        isWindingUp = false;
+        isAttacking = true;
+        ShootAttack();
+    }
+
+    void ChargeAttack()
+    {
+        Debug.Log("Charging!");
+        Vector2 direction = (player.position - transform.position).normalized;
         rb.linearVelocity = direction * chargeSpeed;
+
+        Invoke("StopCharge", 1f);
+    }
+
+    void StopCharge()
+    {
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    void ShootAttack()
+    {
+        Debug.Log("Shooting!");
+        if (projectilePrefab != null && projectileSpawnPoint != null)
+        {
+            Vector2 direction = (player.position - projectileSpawnPoint.position).normalized;
+            GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+            projectile.GetComponent<Rigidbody2D>().linearVelocity = direction * projectileSpeed;
+
+            if (shootSound != null)
+            {
+                audioSource.PlayOneShot(shootSound);
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // Check if the boss collides with a wall
-
-        if (other.gameObject.CompareTag("Wall"))
+        // Charge attack collision
+        if (other.gameObject.CompareTag("Player") && rb.linearVelocity.magnitude > 0.1f)
+        {
+            // Apply charge-specific damage
+            healthManager.TakeDamage(chargeDamage);
+            rb.linearVelocity = Vector2.zero;
+            CancelInvoke("StopCharge");
+            StopCharge();
+        }
+        else if (other.gameObject.CompareTag("Wall") && rb.linearVelocity.magnitude > 0.1f)
         {
             rb.linearVelocity = Vector2.zero;
-            isWaiting = true;
-        }
-
-        // Check if the boss collides with the player
-        if (other.gameObject.CompareTag("Player"))
-        {
-            healthManager.TakeDamage(damage);
+            CancelInvoke("StopCharge");
+            StopCharge();
         }
     }
 

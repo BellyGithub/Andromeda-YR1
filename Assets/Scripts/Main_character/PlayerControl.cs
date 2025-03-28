@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] AudioClip jumpSoundClip;
     [SerializeField] AudioClip hitSoundClip;
     [SerializeField] AudioClip gravSwitchSoundClip;
+    public float volume = 0.5f;
 
     [Header("Dashing Parameters")]
     [SerializeField] private float dashingPower = 24f;
@@ -158,7 +160,6 @@ public class PlayerControl : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, minJumpPower * jumpDirection);
             IsJumping = true;
             audioSource.clip = jumpSoundClip;
-            audioSource.volume = uiManager.volume;
             audioSource.Play();
         }
 
@@ -173,7 +174,6 @@ public class PlayerControl : MonoBehaviour
         if (context.performed && !isDashing && UIManager.GamePaused == false && IsGrounded())
         {
             audioSource.clip = gravSwitchSoundClip;
-            audioSource.volume = uiManager.volume;
             audioSource.Play();
             isGravityFlipped = !isGravityFlipped;
             rb.gravityScale *= -1;
@@ -214,7 +214,6 @@ public class PlayerControl : MonoBehaviour
             if (enemyHealth != null)
             {
                 audioSource.clip = hitSoundClip;
-                audioSource.volume = uiManager.volume;
                 audioSource.Play();
                 healthManager.SetInvincibility(attackCooldown);
                 enemyHealth.TakeDamage(attackDamage);
@@ -223,7 +222,6 @@ public class PlayerControl : MonoBehaviour
             else if (boss != null)
             {
                 audioSource.clip = hitSoundClip;
-                audioSource.volume = uiManager.volume;
                 audioSource.Play();
                 healthManager.SetInvincibility(attackCooldown);
                 boss.TakeDamage(attackDamage);

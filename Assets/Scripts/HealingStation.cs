@@ -24,7 +24,6 @@ public class HealingStation : MonoBehaviour
         {
             HealthManager.heal(healAmount);
             audioSource.clip = healSoundClip;
-            audioSource.volume = uiManager.volume;
             audioSource.Play();
             Debug.Log("Player healed!");
             // Disables use of healing station (Only heals player once)
