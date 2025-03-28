@@ -7,10 +7,12 @@ public class Boss : MonoBehaviour
     public float health;
     private float ratio = 1.0f;
     [SerializeField] GameObject bossBarCanvas;
+    public GameManager gameManager;
     public Image bossBar;
     public float chargeSpeed = 10f;
     public float baseWaitTimeBetweenAttacks = 4f;
     public bool idle = true;
+    public bool dead = false;
 
     [Header("Attack Settings")]
     [SerializeField] private GameObject projectilePrefab;
@@ -38,6 +40,7 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
+        gameManager = FindAnyObjectByType<GameManager>();
         audioSource = GetComponent<AudioSource>();
         bossBarCanvas.SetActive(false);
         health = maxHealth;
@@ -206,6 +209,8 @@ public class Boss : MonoBehaviour
     void Die()
     {
         bossBarCanvas.SetActive(false);
+        gameManager.CompleteLevel();
+        dead = true;
         Destroy(gameObject);
     }
 }

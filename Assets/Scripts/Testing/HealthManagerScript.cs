@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class HealthManagerScript : MonoBehaviour
 {
@@ -50,12 +51,20 @@ public class HealthManagerScript : MonoBehaviour
 
     public void Respawn()
     {
-        Debug.Log("You die");
-        transform.position = initialPosition;
-        currentHealth = 100.0f;
-        Debug.Log("Character has respawned at the initial position!");
-        isInvincible = false;
-        RefreshHealthbar();
+        if (SceneManager.GetActiveScene().name == "BossLevel")
+        {
+            Debug.Log("Player died in BossLevel - restarting scene");
+            SceneManager.LoadScene("BossLevel");
+        }
+        else
+        {
+            Debug.Log("You die");
+            transform.position = initialPosition;
+            currentHealth = 100.0f;
+            Debug.Log("Character has respawned at the initial position!");
+            isInvincible = false;
+            RefreshHealthbar();
+        }
     }
 
     public void heal(float healAmount)

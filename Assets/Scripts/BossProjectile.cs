@@ -21,4 +21,9 @@ public class BossProjectile : MonoBehaviour
         // Destroy the projectile regardless of what it hit
         Destroy(gameObject, destroyDelay);
     }
+
+    private void Update()
+    {
+        Destroy(gameObject, 3.0f);
+    }
 }

@@ -2183,18 +2183,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a972be499342741a1a3c3573813aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
-  health: 1000
+  maxHealth: 1500
+  health: 1500
   bossBarCanvas: {fileID: 1883961111}
+  gameManager: {fileID: 0}
   bossBar: {fileID: 577284333}
-  chargeSpeed: 10
+  chargeSpeed: 20
   baseWaitTimeBetweenAttacks: 4
   idle: 1
+  dead: 0
   projectilePrefab: {fileID: 302881288860797996, guid: 833cf8dbab57119428250e7894ee4c7b, type: 3}
   projectileSpeed: 8
   projectileSpawnPoint: {fileID: 1880604523}
   attackWindupTime: 0.8
-  chargeDamage: 25
+  chargeDamage: 40
+  projectileSpawnOffset: 1.44
   chargeWindupSound: {fileID: 8300000, guid: a18e1371fa4165943abc76eb61be9e5e, type: 3}
   shootWindupSound: {fileID: 8300000, guid: 407b76a83daf749499115afd361bd48c, type: 3}
   shootSound: {fileID: 8300000, guid: 25d2efa7ddb062f43ba249669a1a316f, type: 3}
@@ -42922,7 +42925,8 @@ PrefabInstance:
       value: ReplayLevel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4279269045479292203, guid: f98d2041e3fdf4f44af7df982842c5e0, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7103251610039514073, guid: f98d2041e3fdf4f44af7df982842c5e0, type: 3}
       insertIndex: 0

@@ -21,6 +21,14 @@ public class WallScript : MonoBehaviour
         else Debug.Log("can't find boss walls");
     }
 
+    void Update()
+    {
+        if (bossScript.dead)
+        {
+            audioSource.clip = null;
+        }
+    }
+
     // OnTriggerEnter is called when another collider enters this object's trigger collider
     private void OnTriggerEnter2D(Collider2D other)
     {
