@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 922e052e9ee50c54da41327d5b35c6f2
+guid: 26aec2baad617f64f9a9f0e8eb2656a7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3579656291611255519
-    second: Bossmaybe_0
+      213: -7728184203400721941
+    second: bossdashl_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -101,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -114,7 +114,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bossmaybe_0
+      name: bossdashl_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 4
-        width: 70
-        height: 111
+        width: 78
+        height: 110
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd22b7f6e6e7da130800000000000000
-      internalID: 3579656291611255519
+      spriteID: be9c385a969ffb490800000000000000
+      internalID: -7728184203400721941
       vertices: []
       indices: 
       edges: []
@@ -152,7 +152,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bossmaybe_0: 3579656291611255519
+      bossdashl_0: -7728184203400721941
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

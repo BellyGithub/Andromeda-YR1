@@ -2188,7 +2188,7 @@ MonoBehaviour:
   bossBarCanvas: {fileID: 1883961111}
   gameManager: {fileID: 0}
   bossBar: {fileID: 577284333}
-  chargeSpeed: 20
+  chargeSpeed: 14
   baseWaitTimeBetweenAttacks: 4
   idle: 1
   dead: 0
@@ -2286,7 +2286,7 @@ Animator:
   m_GameObject: {fileID: 976871322}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1d91b4563d162a84082bc6f48fdda321, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3be751b4752fa604e8374336c2b7cb35, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

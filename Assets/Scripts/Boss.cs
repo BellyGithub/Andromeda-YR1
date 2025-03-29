@@ -37,9 +37,11 @@ public class Boss : MonoBehaviour
     private Transform player;
     private SpriteRenderer spriteRenderer;
     private HealthManagerScript healthManager;
+    Animator animator;
 
     void Start()
     {
+        animator = FindAnyObjectByType<Animator>();
         gameManager = FindAnyObjectByType<GameManager>();
         audioSource = GetComponent<AudioSource>();
         bossBarCanvas.SetActive(false);
@@ -147,6 +149,7 @@ public class Boss : MonoBehaviour
         audioSource.PlayOneShot(chargeAttackSound);
         Vector2 direction = (player.position - transform.position).normalized;
         rb.linearVelocity = direction * chargeSpeed;
+        animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
 
         Invoke("StopCharge", 1f);
     }
@@ -154,6 +157,7 @@ public class Boss : MonoBehaviour
     void StopCharge()
     {
         rb.linearVelocity = Vector2.zero;
+        animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
     }
 
     void ShootAttack()
