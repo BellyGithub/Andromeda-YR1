@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
             volume = PlayerPrefs.GetFloat("GameVolume");
         }
         volumeSlider.value = volume;
+        UpdateAllAudioSources();
         GamePaused = false; // In case of restart
         levelCompletePanel.SetActive(false); // Hide menu at start
         pauseMenu.SetActive(false); // Hide menu at start
@@ -107,12 +108,13 @@ public class UIManager : MonoBehaviour
 
     void UpdateAllAudioSources()
     {
-        AudioSource[] audioSources = FindObjectsOfType<AudioSource>(true); // Include inactive objects
+        AudioSource[] audioSources = Object.FindObjectsByType<AudioSource>(FindObjectsSortMode.None); // Include all AudioSources
         foreach (AudioSource source in audioSources)
         {
             source.volume = volume;
         }
     }
+
 
     // Button function to return to the main menu
     public void ReturnToMainMenu()
