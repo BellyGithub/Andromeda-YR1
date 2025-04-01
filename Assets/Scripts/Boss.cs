@@ -58,7 +58,7 @@ public class Boss : MonoBehaviour
         {
             audioSource.volume = volume;
         }
-        if (isAttacking && !isWindingUp)
+        if (!isAttacking && !isWindingUp)
         {
             attackCooldownTimer += Time.deltaTime;
             if (attackCooldownTimer >= baseWaitTimeBetweenAttacks)
@@ -95,6 +95,7 @@ public class Boss : MonoBehaviour
     void ChooseNextAttack()
     {
         if (isAttacking) return;
+        if (idle) return;
 
         // Start windup phase
         isWindingUp = true;
@@ -139,19 +140,16 @@ public class Boss : MonoBehaviour
 
         // Execute attack
         isWindingUp = false;
-        isAttacking = true;
         ShootAttack();
     }
 
     void ChargeAttack()
     {
         Debug.Log("Charging!");
-
         audioSource.PlayOneShot(chargeAttackSound);
         Vector2 direction = (player.position - transform.position).normalized;
         rb.linearVelocity = direction * chargeSpeed;
         animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
-        isAttacking = true;
         attackCooldownTimer = 0f;
         Invoke("StopCharge", 1f);
     }
@@ -160,6 +158,7 @@ public class Boss : MonoBehaviour
     {
         rb.linearVelocity = Vector2.zero;
         animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
+        isAttacking = false;
     }
 
     void ShootAttack()
@@ -182,7 +181,7 @@ public class Boss : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Charge attack collision
-        if (other.gameObject.CompareTag("Player") && !isAttacking)
+        if (other.gameObject.CompareTag("Player") && isAttacking)
         {
             healthManager.TakeDamage(chargeDamage);
             rb.linearVelocity = Vector2.zero;
