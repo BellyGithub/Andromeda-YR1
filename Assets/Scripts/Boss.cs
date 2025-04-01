@@ -146,11 +146,13 @@ public class Boss : MonoBehaviour
     void ChargeAttack()
     {
         Debug.Log("Charging!");
+
         audioSource.PlayOneShot(chargeAttackSound);
         Vector2 direction = (player.position - transform.position).normalized;
         rb.linearVelocity = direction * chargeSpeed;
         animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
-
+        isAttacking = true;
+        attackCooldownTimer = 0f;
         Invoke("StopCharge", 1f);
     }
 
@@ -173,22 +175,25 @@ public class Boss : MonoBehaviour
             {
                 audioSource.PlayOneShot(shootSound);
             }
+            attackCooldownTimer = 0f;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Charge attack collision
-        if (other.gameObject.CompareTag("Player") && rb.linearVelocity.magnitude > 0.1f)
+        if (other.gameObject.CompareTag("Player") && !isAttacking)
         {
             healthManager.TakeDamage(chargeDamage);
             rb.linearVelocity = Vector2.zero;
+            isAttacking = false;
             CancelInvoke("StopCharge");
             StopCharge();
         }
-        else if (other.gameObject.CompareTag("Wall") && rb.linearVelocity.magnitude > 0.1f)
+        else if (other.gameObject.CompareTag("Wall"))
         {
             rb.linearVelocity = Vector2.zero;
+            isAttacking = false;
             CancelInvoke("StopCharge");
             StopCharge();
         }
