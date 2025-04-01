@@ -90,7 +90,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -165,7 +165,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boss_Attack_0
+      name: Boss_Attack_2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -173,21 +173,21 @@ TextureImporter:
         width: 270
         height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 18, z: 0, w: 46}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a8096e7c516658990800000000000000
-      internalID: -7384383770269937526
+      spriteID: dc1301b1ea0cc114986c62a964b5faed
+      internalID: -31470804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Attack_1
+      name: Boss_Attack_2_1
       rect:
         serializedVersion: 2
         x: 270
@@ -195,109 +195,109 @@ TextureImporter:
         width: 270
         height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 18, z: 0, w: 46}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 01562aef2dc19b030800000000000000
-      internalID: 3510869077052777744
+      spriteID: 3d0621c4515ecbf4ba579387cb8ced95
+      internalID: -1000336927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Attack_2
+      name: Boss_Attack_2_2
       rect:
         serializedVersion: 2
         x: 540
         y: 360
         width: 270
-        height: 178
+        height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 18, z: 0, w: 46}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 05cb59c9280552680800000000000000
-      internalID: -8780523376585884592
+      spriteID: df577dd9f864dff459012df0d72a3ce7
+      internalID: -1312446414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Attack_3
+      name: Boss_Attack_2_3
       rect:
         serializedVersion: 2
         x: 0
         y: 180
         width: 270
-        height: 134
+        height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 18, z: 0, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d02ff57f8cfe80c30800000000000000
-      internalID: 4325971088512119309
+      spriteID: 5d05a19c50d164849875aba41b07bda1
+      internalID: -186380456
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Attack_4
+      name: Boss_Attack_2_4
       rect:
         serializedVersion: 2
         x: 270
         y: 180
         width: 270
-        height: 134
+        height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 18, z: 0, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 953d337d91bbae300800000000000000
-      internalID: 282243646323151705
+      spriteID: eddd6f8cdd8eb7549addb0a2e6d61d95
+      internalID: 33802256
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Attack_5
+      name: Boss_Attack_2_5
       rect:
         serializedVersion: 2
         x: 540
         y: 180
         width: 270
-        height: 135
+        height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 18, z: 0, w: 1}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 05a80afb820ecefc0800000000000000
-      internalID: -3464147547736470960
+      spriteID: ddd3176b99243174c81065378b2f7455
+      internalID: -1874595452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Attack_6
+      name: Boss_Attack_2_6
       rect:
         serializedVersion: 2
         x: 0
@@ -305,21 +305,21 @@ TextureImporter:
         width: 270
         height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 18, z: 0, w: 46}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 238d71f418ab77050800000000000000
-      internalID: 5798308109803313202
+      spriteID: 11559e399a408874a925dd92d9012e5d
+      internalID: 1919097979
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boss_Attack_7
+      name: Boss_Attack_2_7
       rect:
         serializedVersion: 2
         x: 270
@@ -327,15 +327,15 @@ TextureImporter:
         width: 270
         height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 18, z: 0, w: 46}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 96de410f088c6d890800000000000000
-      internalID: -7433533678819152535
+      spriteID: af170ca6253400d4a895ff7ee586222a
+      internalID: -1705090628
       vertices: []
       indices: 
       edges: []
@@ -354,14 +354,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Boss_Attack_0: -7384383770269937526
-      Boss_Attack_1: 3510869077052777744
-      Boss_Attack_2: -8780523376585884592
-      Boss_Attack_3: 4325971088512119309
-      Boss_Attack_4: 282243646323151705
-      Boss_Attack_5: -3464147547736470960
-      Boss_Attack_6: 5798308109803313202
-      Boss_Attack_7: -7433533678819152535
+      Boss_Attack_2_0: -31470804
+      Boss_Attack_2_1: -1000336927
+      Boss_Attack_2_2: -1312446414
+      Boss_Attack_2_3: -186380456
+      Boss_Attack_2_4: 33802256
+      Boss_Attack_2_5: -1874595452
+      Boss_Attack_2_6: 1919097979
+      Boss_Attack_2_7: -1705090628
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
