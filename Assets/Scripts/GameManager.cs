@@ -46,7 +46,11 @@ public class GameManager : MonoBehaviour
         {
             return "Level-3"; // If it's Level2, go to Level3
         }
-        return "MainMenuScene"; // Default to MainMenu if no next level is defined
+        else if(SceneManager.GetActiveScene().name == "Demo-Level")
+        {
+            return "BossLevel"; // If it's the Demo Level, go to the boss level
+        }
+            return "MainMenuScene"; // Default to MainMenu if no next level is defined
     }
 
     // Coroutine to load the next level after a delay

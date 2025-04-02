@@ -25,6 +25,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
+    public void PlayDemo()
+    {
+        SceneManager.LoadScene("Demo-Level");
+    }
 
     public void Options()
     {
