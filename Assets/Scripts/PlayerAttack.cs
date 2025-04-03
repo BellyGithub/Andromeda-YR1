@@ -41,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
                 EnemyHealth enemyHealth = currentEnemy.GetComponent<EnemyHealth>();
                 if (enemyHealth != null)
                 {
-                    enemyHealth.TakeDamage(attackDamage);
+                    enemyHealth.TakeDamage(attackDamage, transform.localScale);
                     Debug.Log($"Attacked {currentEnemy.name}, health remaining: {enemyHealth.CurrentHealth}");
 
                     // Start cooldown

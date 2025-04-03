@@ -216,7 +216,7 @@ public class PlayerControl : MonoBehaviour
                 audioSource.clip = hitSoundClip;
                 audioSource.Play();
                 healthManager.SetInvincibility(attackCooldown);
-                enemyHealth.TakeDamage(attackDamage);
+                enemyHealth.TakeDamage(attackDamage, new Vector2(transform.localScale.x, 0f));
                 Debug.Log($"Attacked {currentEnemy?.name}, health remaining: {enemyHealth?.CurrentHealth}");
             }
             else if (boss != null)
