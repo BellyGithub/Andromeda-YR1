@@ -43,6 +43,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float dashingCooldown = 1f;
     private bool canDash = true;
     private bool isDashing;
+    private bool canFlipInAir = true;
 
     [Header("Attack Parameters")]
     public int attackDamage = 50;
@@ -105,6 +106,8 @@ public class PlayerControl : MonoBehaviour
         rb.linearVelocity = new Vector2(movementInput.x * speed, rb.linearVelocity.y);
 
         bool grounded = IsGrounded();
+
+        if (grounded) canFlipInAir = true;
 
         if (!grounded && !_IsJumping)
         {
@@ -171,17 +174,31 @@ public class PlayerControl : MonoBehaviour
 
     public void SwitchGravity(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDashing && UIManager.GamePaused == false && IsGrounded())
+        if (context.performed && !isDashing && !UIManager.GamePaused)
         {
-            audioSource.clip = gravSwitchSoundClip;
-            audioSource.Play();
-            isGravityFlipped = !isGravityFlipped;
-            rb.gravityScale *= -1;
+            if (IsGrounded())
+            {
+                FlipGravity();
+                canFlipInAir = true;
+            }
 
-            Vector3 localScale = transform.localScale;
-            localScale.y *= -1f;
-            transform.localScale = localScale;
+            else if (canFlipInAir)
+            {
+                FlipGravity();
+                canFlipInAir = false;
+            }
         }
+    }
+    private void FlipGravity()
+    {
+        audioSource.clip = gravSwitchSoundClip;
+        audioSource.Play();
+        isGravityFlipped = !isGravityFlipped;
+        rb.gravityScale *= -1;
+
+        Vector3 localScale = transform.localScale;
+        localScale.y *= -1f;
+        transform.localScale = localScale;
     }
 
     public void Dash(InputAction.CallbackContext context)
