@@ -3,6 +3,8 @@ using UnityEngine;
 public class FinishTrigger : MonoBehaviour
 {
     [SerializeField] private string sceneName;
+
+    [System.Obsolete]
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

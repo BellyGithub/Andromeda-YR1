@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem; 
+using System.Collections;
 
 public class HealingStation : MonoBehaviour
 {
@@ -26,8 +28,20 @@ public class HealingStation : MonoBehaviour
             audioSource.clip = healSoundClip;
             audioSource.Play();
             Debug.Log("Player healed!");
-            // Disables use of healing station (Only heals player once)
             canUse = false;
+
+            // Trigger vibration on heal
+            if (Gamepad.current != null)
+            {
+                StartCoroutine(VibrateOnHeal(0.5f, 0.7f, 0.4f)); // (lowFreq, highFreq, duration)
+            }
         }
+    }
+
+    private IEnumerator VibrateOnHeal(float lowFreq, float highFreq, float duration)
+    {
+        Gamepad.current.SetMotorSpeeds(lowFreq, highFreq);
+        yield return new WaitForSeconds(duration);
+        Gamepad.current.SetMotorSpeeds(0, 0);
     }
 }

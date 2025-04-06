@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class HealthManagerScript : MonoBehaviour
 {
@@ -17,6 +18,25 @@ public class HealthManagerScript : MonoBehaviour
     [Header("SOUNDS")]
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip hurtSoundClip;
+
+    private void VibrateController()
+    {
+        if (Gamepad.current != null)
+        {
+            Gamepad.current.SetMotorSpeeds(0.5f, 0.5f);
+            StartCoroutine(StopVibrationAfterDelay(0.3f));
+        }
+    }
+
+    private IEnumerator StopVibrationAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (Gamepad.current != null)
+        {
+            Gamepad.current.SetMotorSpeeds(0f, 0f);
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         if (isInvincible)
@@ -30,10 +50,11 @@ public class HealthManagerScript : MonoBehaviour
         currentHealth -= damage;
         RefreshHealthbar();
         Debug.Log("health:" + currentHealth);
-        
+
+        VibrateController();
+
         if (currentHealth <= 0)
         {
-            
             isInvincible = true;
             Respawn();
         }
@@ -89,7 +110,7 @@ public class HealthManagerScript : MonoBehaviour
         yield return new WaitForSeconds(duration);
         isInvincible = false;
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -97,7 +118,6 @@ public class HealthManagerScript : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using System.Collections;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -30,7 +32,23 @@ public class EnemyHealth : MonoBehaviour
     {
         Debug.Log($"{gameObject.name} has been defeated!");
         scoreScript.AddScore(enemyScore);
-        Destroy(gameObject); // Destroy the enemy
+
+        if (Gamepad.current != null)
+        {
+            StartCoroutine(VibrateAndDestroy());
+        }
+        else
+        {
+            Destroy(gameObject); // fallback if no controller
+        }
+    }
+
+    private IEnumerator VibrateAndDestroy()
+    {
+        Gamepad.current.SetMotorSpeeds(0.5f, 1.0f); // rumble
+        yield return new WaitForSeconds(0.3f);      // wait 0.2s
+        Gamepad.current.SetMotorSpeeds(0f, 0f);     // stop rumble
+        Destroy(gameObject);                        // then destroy enemy
     }
 
     private void SpawnDamageParticles(Vector2 attackDirection)
