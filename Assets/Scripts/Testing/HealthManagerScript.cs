@@ -9,11 +9,14 @@ public class HealthManagerScript : MonoBehaviour
 {
     public float maxHealth = 100.0f;
     public float currentHealth;
-    public float invincibilityDuration = 2.0f;
+    public float invincibilityDuration = 0.5f;
     public Image healthbar;
     public bool isInvincible = false;
+    private bool damaged = false;
     private float ratio = 1.0f;
     private Vector3 initialPosition;
+
+    [SerializeField] SpriteRenderer sr;
 
     [Header("SOUNDS")]
     [SerializeField] AudioSource audioSource;
@@ -43,9 +46,8 @@ public class HealthManagerScript : MonoBehaviour
         {
             return;
         }
-
+        damaged = true;
         audioSource.clip = hurtSoundClip;
-        audioSource.volume = 0.2f;
         audioSource.Play();
         currentHealth -= damage;
         RefreshHealthbar();
@@ -107,7 +109,10 @@ public class HealthManagerScript : MonoBehaviour
     private IEnumerator InvincibilityCoroutine(float duration)
     {
         isInvincible = true;
+        if (damaged) { sr.color = Color.red; }
         yield return new WaitForSeconds(duration);
+        sr.color = Color.white;
+        damaged = false;
         isInvincible = false;
     }
 

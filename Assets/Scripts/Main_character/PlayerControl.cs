@@ -58,7 +58,6 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         dashCooldown.fillAmount = Mathf.Clamp(0f, 0f, dashingCooldown);
-        audioSource = GetComponent<AudioSource>();
         healthManager = FindAnyObjectByType<HealthManagerScript>();
         uiManager = FindAnyObjectByType<UIManager>();
     }
