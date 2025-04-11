@@ -50,6 +50,7 @@ public class Boss : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        StartCoroutine(LoopAttackAnimation());
     }
 
     void Update()
@@ -99,7 +100,7 @@ public class Boss : MonoBehaviour
 
         // Start windup phase
         isWindingUp = true;
-        int attackType = Random.Range(0, 2); // 0 or 1
+        int attackType = Random.Range(0, 3); // 0, 1, or 2
 
         switch (attackType)
         {
@@ -108,6 +109,9 @@ public class Boss : MonoBehaviour
                 break;
             case 1:
                 StartCoroutine(ShootWindup());
+                break;
+            case 2:
+                StartCoroutine(AnimationAttackWindup());
                 break;
         }
     }
@@ -142,6 +146,35 @@ public class Boss : MonoBehaviour
         isWindingUp = false;
         ShootAttack();
     }
+    System.Collections.IEnumerator AnimationAttackWindup()
+{
+    isWindingUp = true;
+
+    yield return new WaitForSeconds(attackWindupTime);
+
+    isWindingUp = false;
+    isAttacking = true;
+
+    animator.SetBool("IsAttacking", true);
+
+    // Simulate attack duration
+    yield return new WaitForSeconds(1.2f); // Adjust as needed for animation timing
+
+    animator.SetBool("IsAttacking", false);
+    isAttacking = false;
+}
+System.Collections.IEnumerator LoopAttackAnimation()
+{
+    while (!dead)
+    {
+        animator.SetBool("IsAttacking", true);
+        yield return new WaitForSeconds(3.0f); // Duration of the animation active state
+        animator.SetBool("IsAttacking", false);
+        yield return new WaitForSeconds(2.0f); // Wait to complete the 2-second cycle
+    }
+}
+
+
 
     void ChargeAttack()
     {
