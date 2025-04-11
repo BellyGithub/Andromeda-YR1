@@ -190,10 +190,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  invincibilityDuration: 2
+  invincibilityDuration: 0.8
   healthbar: {fileID: 0}
   isInvincible: 0
-  audioSource: {fileID: 0}
+  sr: {fileID: 1476585119974359020}
+  audioSource: {fileID: 907956522982433094}
   hurtSoundClip: {fileID: 8300000, guid: e37e4315bc44d0b42ba3d8375241ea4a, type: 3}
 --- !u!95 &6422774993775972703
 Animator:
@@ -425,14 +426,16 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  dashCooldown: {fileID: 0}
   speed: 10
   minJumpPower: 10
   maxJumpPower: 20
   jumpHoldTimeMax: 0.35
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 907956522982433094}
   jumpSoundClip: {fileID: 8300000, guid: aed403026f0424541adb802676a02707, type: 3}
   hitSoundClip: {fileID: 8300000, guid: 5aad76a08200c744e8ef3b3010823a75, type: 3}
   gravSwitchSoundClip: {fileID: 8300000, guid: 83210f0bc6950cb4b8646c5a76a81362, type: 3}
+  volume: 0.5
   dashingPower: 24
   dashingTime: 0.2
   dashingCooldown: 1

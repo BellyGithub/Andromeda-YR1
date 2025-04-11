@@ -234,9 +234,9 @@ MonoBehaviour:
   damage: 10
   projectilePrefab: {fileID: 4657840900403975444, guid: 92f1589d0262dcd4388172087292536f, type: 3}
   firePoint: {fileID: 1334041499164387332}
-  projectileSpeed: 8
-  attackRange: 25
-  shootCooldown: 1
+  projectileSpeed: 5
+  attackRange: 10
+  shootCooldown: 2
 --- !u!1 &6341951675005162304
 GameObject:
   m_ObjectHideFlags: 0

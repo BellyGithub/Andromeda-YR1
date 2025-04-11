@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerControl : MonoBehaviour
     public Animator animator;
     public Transform groundCheck;
     public LayerMask groundLayer;
+    public Image dashCooldown;
     UIManager uiManager;
 
     public float speed = 8f;
@@ -41,6 +43,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float dashingPower = 24f;
     [SerializeField] private float dashingTime = 0.2f;
     [SerializeField] private float dashingCooldown = 1f;
+    private float dashCooldownTimer = 0f;
     private bool canDash = true;
     private bool isDashing;
     private bool canFlipInAir = true;
@@ -54,7 +57,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        dashCooldown.fillAmount = Mathf.Clamp(0f, 0f, dashingCooldown);
         healthManager = FindAnyObjectByType<HealthManagerScript>();
         uiManager = FindAnyObjectByType<UIManager>();
     }
@@ -282,7 +285,8 @@ public class PlayerControl : MonoBehaviour
 
     private IEnumerator DashCoroutine()
     {
-        canDash = false;
+        dashCooldown.fillAmount = dashingCooldown;
+        
         isDashing = true;
         IsDashing = true;
 
@@ -297,8 +301,17 @@ public class PlayerControl : MonoBehaviour
         rb.gravityScale = originalGravity;
         isDashing = false;
         IsDashing = false;
+        canDash = false;
+        dashCooldownTimer = dashingCooldown;
 
-        yield return new WaitForSeconds(dashingCooldown);
+        while (dashCooldownTimer > 0)
+        {
+            dashCooldownTimer -= Time.deltaTime;
+            dashCooldown.fillAmount = dashCooldownTimer / dashingCooldown;
+            yield return null;
+        }
+
+        dashCooldown.fillAmount = 0f;
         canDash = true;
     }
 
