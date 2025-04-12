@@ -2375,6 +2375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1731633541}
+  elapsedTime: 0
 --- !u!114 &227308374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101059,12 +101060,8 @@ PrefabInstance:
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5071420718203759019, guid: e103f10a4eac84d48926c38515192f01, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -558
-      objectReference: {fileID: 0}
-    - target: {fileID: 5071420718203759019, guid: e103f10a4eac84d48926c38515192f01, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 290
+      value: -487.8
       objectReference: {fileID: 0}
     - target: {fileID: 5071420718203759019, guid: e103f10a4eac84d48926c38515192f01, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -101155,7 +101152,7 @@ PrefabInstance:
     - target: {fileID: 2129546198447904648, guid: 92ad1716bd80b7d488e88009166dda52, type: 3}
       propertyPath: timeText
       value: 
-      objectReference: {fileID: 1731633541}
+      objectReference: {fileID: 4954997251815422263}
     - target: {fileID: 2129546198447904648, guid: 92ad1716bd80b7d488e88009166dda52, type: 3}
       propertyPath: pauseMenu
       value: 
@@ -101489,7 +101486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6287754501545013042, guid: f98d2041e3fdf4f44af7df982842c5e0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7103251610039514073, guid: f98d2041e3fdf4f44af7df982842c5e0, type: 3}
       propertyPath: m_Pivot.x
@@ -101583,6 +101580,17 @@ PrefabInstance:
       addedObject: {fileID: 1407990389}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f98d2041e3fdf4f44af7df982842c5e0, type: 3}
+--- !u!114 &4954997251815422263 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2765211304801435267, guid: f98d2041e3fdf4f44af7df982842c5e0, type: 3}
+  m_PrefabInstance: {fileID: 4954997251815422262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5603788454228790497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101788,7 +101796,6 @@ SceneRoots:
   - {fileID: 233441696}
   - {fileID: 1088595749}
   - {fileID: 1548043898}
-  - {fileID: 1299819291}
   - {fileID: 965463356}
   - {fileID: 287840982}
   - {fileID: 513925529}

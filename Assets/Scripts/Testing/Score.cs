@@ -6,15 +6,19 @@ public class Score : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     private float startTime;
-    private int score = 0;
+    public int score = 0;
 
-    public void LevelCompleted(string sceneName)
+    public void LevelCompleted()
     {
-        int initialScore = 100000;
-        float elapsedTime = Time.time - startTime;
-        int penalty = Mathf.FloorToInt(elapsedTime) * 1000;
-        SceneManager.LoadScene(sceneName);
-        score += Mathf.Max(0, initialScore - penalty);
+        float initialScore = 100f;
+        float timeTaken = 10f;
+        float maxTime = 45f;   // Maximum time for full bonus eligibility
+
+        timeTaken = Mathf.Clamp(timeTaken, 0f, maxTime);
+        float timeFactor = 1f - (timeTaken / maxTime); // 1 when fast, 0 when slow
+        float bonus = initialScore * timeFactor; // scale the bonus by speed
+        float finalScore = initialScore + bonus;
+        finalScore = score;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
