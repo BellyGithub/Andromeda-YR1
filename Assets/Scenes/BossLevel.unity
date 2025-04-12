@@ -2196,7 +2196,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   bossBar: {fileID: 577284333}
   chargeSpeed: 14
-  baseWaitTimeBetweenAttacks: 4
+  baseWaitTimeBetweenAttacks: 1.5
   idle: 1
   dead: 0
   projectilePrefab: {fileID: 302881288860797996, guid: 833cf8dbab57119428250e7894ee4c7b, type: 3}
@@ -2210,6 +2210,7 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: 25d2efa7ddb062f43ba249669a1a316f, type: 3}
   chargeAttackSound: {fileID: 8300000, guid: c795ae65fb635134cb8188e37ddfbb63, type: 3}
   volume: 0.5
+  animator: {fileID: 976871328}
 --- !u!50 &976871326
 Rigidbody2D:
   serializedVersion: 5
@@ -2247,7 +2248,7 @@ Animator:
   m_GameObject: {fileID: 976871322}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3be751b4752fa604e8374336c2b7cb35, type: 2}
+  m_Controller: {fileID: 9100000, guid: cb6e181ecc20d3b4aaab3dc2a4287f90, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

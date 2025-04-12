@@ -31,7 +31,6 @@ public class CameraFollow : MonoBehaviour
         currentYOffset = Mathf.Lerp(currentYOffset, targetYOffset, downLerpSpeed * Time.deltaTime);
 
         Vector3 desiredPosition = new Vector3(target.position.x, target.position.y + currentYOffset, -10f);
-
         transform.position = Vector3.Slerp(transform.position, desiredPosition, FollowSpeed * Time.deltaTime);
     }
 }

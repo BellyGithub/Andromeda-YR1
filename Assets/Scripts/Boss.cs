@@ -37,11 +37,10 @@ public class Boss : MonoBehaviour
     private Transform player;
     private SpriteRenderer spriteRenderer;
     private HealthManagerScript healthManager;
-    Animator animator;
+    [SerializeField] Animator animator;
 
     void Start()
     {
-        animator = FindAnyObjectByType<Animator>();
         gameManager = FindAnyObjectByType<GameManager>();
         audioSource = GetComponent<AudioSource>();
         bossBarCanvas.SetActive(false);
@@ -50,7 +49,6 @@ public class Boss : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        StartCoroutine(LoopAttackAnimation());
     }
 
     void Update()
@@ -98,9 +96,8 @@ public class Boss : MonoBehaviour
         if (isAttacking) return;
         if (idle) return;
 
-        // Start windup phase
         isWindingUp = true;
-        int attackType = Random.Range(0, 3); // 0, 1, or 2
+        int attackType = Random.Range(0, 2); // Only 0 and 1 since animation attack was removed
 
         switch (attackType)
         {
@@ -110,15 +107,11 @@ public class Boss : MonoBehaviour
             case 1:
                 StartCoroutine(ShootWindup());
                 break;
-            case 2:
-                StartCoroutine(AnimationAttackWindup());
-                break;
         }
     }
 
     System.Collections.IEnumerator ChargeWindup()
     {
-        // Play charge warning sound
         if (chargeWindupSound != null)
         {
             audioSource.PlayOneShot(chargeWindupSound);
@@ -126,7 +119,6 @@ public class Boss : MonoBehaviour
 
         yield return new WaitForSeconds(attackWindupTime);
 
-        // Execute attack
         isWindingUp = false;
         isAttacking = true;
         ChargeAttack();
@@ -134,7 +126,7 @@ public class Boss : MonoBehaviour
 
     System.Collections.IEnumerator ShootWindup()
     {
-        // Play shoot warning sound
+        animator.SetBool("isShooting", true);
         if (shootWindupSound != null)
         {
             audioSource.PlayOneShot(shootWindupSound);
@@ -142,39 +134,9 @@ public class Boss : MonoBehaviour
 
         yield return new WaitForSeconds(attackWindupTime);
 
-        // Execute attack
         isWindingUp = false;
         ShootAttack();
     }
-    System.Collections.IEnumerator AnimationAttackWindup()
-{
-    isWindingUp = true;
-
-    yield return new WaitForSeconds(attackWindupTime);
-
-    isWindingUp = false;
-    isAttacking = true;
-
-    animator.SetBool("IsAttacking", true);
-
-    // Simulate attack duration
-    yield return new WaitForSeconds(1.2f); // Adjust as needed for animation timing
-
-    animator.SetBool("IsAttacking", false);
-    isAttacking = false;
-}
-System.Collections.IEnumerator LoopAttackAnimation()
-{
-    while (!dead)
-    {
-        animator.SetBool("IsAttacking", true);
-        yield return new WaitForSeconds(3.0f); // Duration of the animation active state
-        animator.SetBool("IsAttacking", false);
-        yield return new WaitForSeconds(2.0f); // Wait to complete the 2-second cycle
-    }
-}
-
-
 
     void ChargeAttack()
     {
@@ -182,7 +144,7 @@ System.Collections.IEnumerator LoopAttackAnimation()
         audioSource.PlayOneShot(chargeAttackSound);
         Vector2 direction = (player.position - transform.position).normalized;
         rb.linearVelocity = direction * chargeSpeed;
-        animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
+        animator.SetBool("isCharging", true);
         attackCooldownTimer = 0f;
         Invoke("StopCharge", 1f);
     }
@@ -190,7 +152,7 @@ System.Collections.IEnumerator LoopAttackAnimation()
     void StopCharge()
     {
         rb.linearVelocity = Vector2.zero;
-        animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
+        animator.SetBool("isCharging", false);
         isAttacking = false;
     }
 
@@ -207,18 +169,19 @@ System.Collections.IEnumerator LoopAttackAnimation()
             {
                 audioSource.PlayOneShot(shootSound);
             }
+            animator.SetBool("isShooting", false);
             attackCooldownTimer = 0f;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // Charge attack collision
         if (other.gameObject.CompareTag("Player") && isAttacking)
         {
             healthManager.TakeDamage(chargeDamage);
             rb.linearVelocity = Vector2.zero;
             isAttacking = false;
+            animator.SetBool("isCharging", false);
             CancelInvoke("StopCharge");
             StopCharge();
         }
@@ -226,6 +189,7 @@ System.Collections.IEnumerator LoopAttackAnimation()
         {
             rb.linearVelocity = Vector2.zero;
             isAttacking = false;
+            animator.SetBool("isCharging", false);
             CancelInvoke("StopCharge");
             StopCharge();
         }

@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour
     public LayerMask groundLayer;
     public Image dashCooldown;
     UIManager uiManager;
+    CameraFollow camera;
 
     public float speed = 8f;
     //public float jumpingPower = 16f;
@@ -20,6 +21,7 @@ public class PlayerControl : MonoBehaviour
     private bool isGravityFlipped = false;
 
     private Vector2 movementInput;
+    private Vector2 lookInput;
     private bool _IsRunning = false;
     private bool _IsJumping = false;
     private bool _IsDashing = false;
@@ -57,6 +59,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Start()
     {
+        camera = FindAnyObjectByType<CameraFollow>();
         dashCooldown.fillAmount = Mathf.Clamp(0f, 0f, dashingCooldown);
         healthManager = FindAnyObjectByType<HealthManagerScript>();
         uiManager = FindAnyObjectByType<UIManager>();
