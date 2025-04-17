@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
     }
 
     // This method now accepts 3 arguments: score, time, and next scene name
-    public void ShowLevelComplete(int score, float time, string sceneName)
+    public void ShowLevelComplete(float score, float time)
     {
         if (!isLevelCompleted)
         {
@@ -73,7 +73,6 @@ public class UIManager : MonoBehaviour
             scoreText.text = "Score: " + score;
             timeText.text = "Time: " + time.ToString("F2") + "s"; // Format to 2 decimal places
             Time.timeScale = 0f; // Pause the game
-            nextSceneName = sceneName; // Store the next level name correctly
         }
     }
 

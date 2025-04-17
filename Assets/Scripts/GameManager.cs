@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public UIManager uiManager; // Reference to the UIManager
-    private int playerScore = 100; // Example score (you can update this logic)
+    Score score;
+    Timer timer;
     private float levelTime = 0f; // Tracks the time for the level
     private bool levelCompleted = false; // To ensure the level is only completed once
 
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        score = FindAnyObjectByType<Score>();
+        timer = FindAnyObjectByType<Timer>();
         Time.timeScale = 1f; // Reset time scale when the level starts
     }
 
@@ -29,9 +32,11 @@ public class GameManager : MonoBehaviour
         if (!levelCompleted)
         {
             levelCompleted = true;
-            string nextSceneName = GetNextSceneName(); // Get the next level name
-            uiManager.ShowLevelComplete(playerScore, levelTime, nextSceneName); // Pass score, time, and next level
-            StartCoroutine(LoadNextLevelAfterDelay(10f)); // Wait 10 seconds before loading the next level (you can adjust this)
+            //string nextSceneName = GetNextSceneName(); // Get the next level name
+            float finalScore = score.score;
+            float finalTime = timer.elapsedTime;
+            uiManager.ShowLevelComplete(finalScore, finalTime); // Pass score, time, and next level
+            //StartCoroutine(LoadNextLevelAfterDelay(10f)); // Wait 10 seconds before loading the next level (you can adjust this)
         }
     }
 

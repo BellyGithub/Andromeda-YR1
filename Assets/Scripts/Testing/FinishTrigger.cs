@@ -13,7 +13,7 @@ public class FinishTrigger : MonoBehaviour
             if (scoreManager != null)
             {
                 Debug.Log("Loading next level... beep boop...");
-                scoreManager.LevelCompleted(sceneName);
+                scoreManager.LevelCompleted();
             }
             else
             {

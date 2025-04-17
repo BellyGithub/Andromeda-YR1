@@ -7,7 +7,7 @@ public class WallScript : MonoBehaviour
     [SerializeField] Boss bossScript;
     AudioSource audioSource;
     [SerializeField] private AudioClip bossMusic;
-    public float volume = 0.5f;
+    public float volume;
     UIManager uiManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

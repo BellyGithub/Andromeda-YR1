@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 342100520}
+  elapsedTime: 0
 --- !u!114 &94982742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,7 +989,7 @@ PrefabInstance:
     - target: {fileID: 2129546198447904648, guid: 92ad1716bd80b7d488e88009166dda52, type: 3}
       propertyPath: timeText
       value: 
-      objectReference: {fileID: 342100520}
+      objectReference: {fileID: 1598824811}
     - target: {fileID: 2129546198447904648, guid: 92ad1716bd80b7d488e88009166dda52, type: 3}
       propertyPath: pauseMenu
       value: 
@@ -996,7 +997,7 @@ PrefabInstance:
     - target: {fileID: 2129546198447904648, guid: 92ad1716bd80b7d488e88009166dda52, type: 3}
       propertyPath: scoreText
       value: 
-      objectReference: {fileID: 1520993882}
+      objectReference: {fileID: 1598824812}
     - target: {fileID: 2129546198447904648, guid: 92ad1716bd80b7d488e88009166dda52, type: 3}
       propertyPath: optionsMenu
       value: 
@@ -2195,7 +2196,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   bossBar: {fileID: 577284333}
   chargeSpeed: 14
-  baseWaitTimeBetweenAttacks: 4
+  baseWaitTimeBetweenAttacks: 1.5
   idle: 1
   dead: 0
   projectilePrefab: {fileID: 302881288860797996, guid: 833cf8dbab57119428250e7894ee4c7b, type: 3}
@@ -2209,6 +2210,7 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: 25d2efa7ddb062f43ba249669a1a316f, type: 3}
   chargeAttackSound: {fileID: 8300000, guid: c795ae65fb635134cb8188e37ddfbb63, type: 3}
   volume: 0.5
+  animator: {fileID: 976871328}
 --- !u!50 &976871326
 Rigidbody2D:
   serializedVersion: 5
@@ -2246,7 +2248,7 @@ Animator:
   m_GameObject: {fileID: 976871322}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3be751b4752fa604e8374336c2b7cb35, type: 2}
+  m_Controller: {fileID: 9100000, guid: cb6e181ecc20d3b4aaab3dc2a4287f90, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2393,7 +2395,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.7, y: 1.16}
+    oldSize: {x: 0.7, y: 1.11}
     newSize: {x: 0.7, y: 1.11}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2510,7 +2512,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.7, y: 1.16}
+    oldSize: {x: 0.7, y: 1.11}
     newSize: {x: 0.7, y: 1.11}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3357,12 +3359,8 @@ PrefabInstance:
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5071420718203759019, guid: e103f10a4eac84d48926c38515192f01, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -558
-      objectReference: {fileID: 0}
-    - target: {fileID: 5071420718203759019, guid: e103f10a4eac84d48926c38515192f01, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 290
+      value: -425.1
       objectReference: {fileID: 0}
     - target: {fileID: 5071420718203759019, guid: e103f10a4eac84d48926c38515192f01, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -43179,6 +43177,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7103251610039514073, guid: f98d2041e3fdf4f44af7df982842c5e0, type: 3}
   m_PrefabInstance: {fileID: 1598824808}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1598824811 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2765211304801435267, guid: f98d2041e3fdf4f44af7df982842c5e0, type: 3}
+  m_PrefabInstance: {fileID: 1598824808}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1598824812 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6249382291122548038, guid: f98d2041e3fdf4f44af7df982842c5e0, type: 3}
+  m_PrefabInstance: {fileID: 1598824808}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1655659245
 GameObject:
   m_ObjectHideFlags: 0
