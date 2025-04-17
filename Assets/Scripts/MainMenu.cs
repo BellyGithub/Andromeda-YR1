@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayDemo()
     {
-        SceneManager.LoadScene("Demo-Level");
+        SceneManager.LoadScene("Level-1");
     }
 
     public void Options()
